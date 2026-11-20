@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>배관설비 Hub — 급수·배수·펌프·온수기 배관 계산기</title>
+<meta name="description" content="배관설비 Hub: 무료 온라인 배관 계산기 — 급수관경, 배수관경, 수압·수두, 펌프 양정·동력, 온수기 용량을 KS 기준과 380V/220V 60Hz 한국 설비 조건에 맞춰 계산합니다.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+:root{--navy:#0f172a;--navy2:#1e293b;--amber:#f59e0b;--amber-dark:#d97706;--amber-bg:#fef3c7;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--green:#15803d;--green-bg:#dcfce7;--red:#b91c1c;--red-bg:#fee2e2;--radius:14px;--shadow:0 1px 3px rgba(15,23,42,.08),0 4px 14px rgba(15,23,42,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+a{color:var(--amber-dark)}
+/* ---------- Header ---------- */
+header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.header-in{display:flex;align-items:center;gap:14px;padding:13px 16px;max-width:1080px;margin:0 auto;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;flex:1;min-width:200px}
+.brand .mark{width:38px;height:38px;border-radius:9px;background:var(--amber);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;flex:none}
+.brand b{font-size:19px;letter-spacing:.2px}
+.brand b span{color:var(--amber)}
+.brand small{display:block;font-size:11.5px;color:#94a3b8;font-weight:400}
+nav.main-nav{display:flex;gap:4px;flex-wrap:wrap}
+nav.main-nav a{color:#cbd5e1;text-decoration:none;font-size:14px;font-weight:600;padding:8px 11px;border-radius:8px}
+nav.main-nav a:hover{background:var(--navy2);color:#fff}
+/* ---------- Hero ---------- */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#1e293b 60%,#334155 100%);color:#fff;padding:44px 0 40px}
+.hero h1{font-size:clamp(26px,5vw,40px);line-height:1.2;max-width:760px}
+.hero h1 span{color:var(--amber)}
+.hero p{color:#cbd5e1;font-size:16px;max-width:720px;margin-top:12px}
+.hero .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.hero .badge{background:rgba(245,158,11,.16);border:1px solid rgba(245,158,11,.45);color:#fde68a;font-size:13px;font-weight:600;border-radius:999px;padding:6px 13px}
+section{padding:34px 0 8px}
+section h2{font-size:24px;margin-bottom:6px}
+section h2 .bar{color:var(--amber)}
+.section-sub{color:var(--muted);font-size:15px;max-width:760px;margin-bottom:20px}
+/* ---------- Calculator cards ---------- */
+.calc-grid{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:860px){.calc-grid{grid-template-columns:1fr 1fr}.calc-grid .wide{grid-column:1 / -1}}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 20px;border-top:4px solid var(--amber)}
+.card h3{font-size:18px;margin-bottom:2px}
+.card .tag{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-dark)}
+.card .desc{font-size:14px;color:var(--muted);margin:6px 0 16px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:13.5px;font-weight:600;margin-bottom:6px}
+.field label small{font-weight:400;color:var(--muted)}
+.field input,.field select{width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:inherit;outline:none;background:#fff;color:var(--text)}
+.field input:focus,.field select:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(245,158,11,.18)}
+.field-row{display:grid;grid-template-columns:1fr;gap:0 12px}
+@media(min-width:560px){.field-row{grid-template-columns:1fr 1fr}}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--amber);color:var(--navy);border:0;border-radius:10px;padding:12px 22px;font-size:15px;font-weight:800;min-height:46px;cursor:pointer;font-family:inherit}
+.btn:hover{background:var(--amber-dark);color:#fff}
+.btn-row{margin-top:4px}
+.results{display:none;margin-top:16px}
+.results.show{display:block}
+.results h4{font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(min-width:560px){.stat-grid{grid-template-columns:repeat(3,1fr)}}
+.stat{background:#f8fafc;border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center}
+.stat.hero{background:var(--amber-bg);border-color:#fde68a}
+.stat .k{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.stat .v{font-size:19px;font-weight:800;margin-top:3px;word-break:break-word}
+.stat.hero .v{color:#92400e}
+.stat.wide{grid-column:1 / -1}
+.verdict{margin-top:10px;border-radius:10px;padding:11px 14px;font-size:14px;font-weight:600}
+.verdict.ok{background:var(--green-bg);color:var(--green)}
+.verdict.warn{background:var(--amber-bg);color:#92400e}
+.verdict.bad{background:var(--red-bg);color:var(--red)}
+.note{font-size:12.5px;color:var(--muted);margin-top:12px}
+.formula{font-size:13px;color:var(--muted);background:#f8fafc;border:1px dashed var(--border);border-radius:8px;padding:8px 11px;margin-top:12px}
+.formula code{color:var(--navy);font-weight:600}
+/* ---------- Table ---------- */
+.table-wrap{overflow-x:auto;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+th{background:var(--navy);color:#fff;text-align:left;padding:11px 12px;font-size:13px}
+td{padding:10px 12px;border-bottom:1px solid var(--border)}
+tr:nth-child(even) td{background:#f8fafc}
+/* ---------- Guides ---------- */
+.guide-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:640px){.guide-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:960px){.guide-grid{grid-template-columns:1fr 1fr 1fr}}
+.guide{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 18px;border-left:4px solid var(--amber)}
+.guide .g-tag{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--amber-dark)}
+.guide h3{font-size:16.5px;margin:5px 0 7px}
+.guide p{font-size:14px;color:#334155}
+.guide-link{margin-top:10px;font-size:14px;font-weight:700}
+.guide-link a{text-decoration:none}
+.guide-link a:hover{text-decoration:underline}
+/* ---------- FAQ ---------- */
+.faq{max-width:820px}
+.faq-item{background:#fff;border-radius:12px;box-shadow:var(--shadow);margin-bottom:10px;overflow:hidden}
+.faq-item button{width:100%;text-align:left;background:none;border:0;padding:16px 18px;font-size:15.5px;font-weight:700;font-family:inherit;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.faq-item button .chev{color:var(--amber-dark);font-size:20px;flex:none}
+.faq-item .answer{display:none;padding:0 18px 16px;font-size:14.5px;color:#334155}
+.faq-item.open .answer{display:block}
+.faq-item.open .chev{transform:rotate(45deg)}
+/* ---------- About / footer ---------- */
+.about{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 20px}
+.about p{font-size:14.5px;color:#334155;margin-bottom:10px}
+footer{background:var(--navy);color:#94a3b8;margin-top:44px;padding:30px 0 26px}
+footer .cols{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:640px){footer .cols{grid-template-columns:2fr 1fr 1fr}}
+footer h4{color:#fff;font-size:15px;margin-bottom:10px}
+footer p,footer a{font-size:13.5px;color:#94a3b8;text-decoration:none}
+footer a:hover{color:#fff}
+footer ul{list-style:none}
+footer li{margin-bottom:6px}
+.copy{border-top:1px solid #1e293b;margin-top:22px;padding-top:16px;font-size:12.5px;text-align:center}
+/* ---------- Modal ---------- */
+.modal-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.65);display:none;align-items:center;justify-content:center;z-index:100;padding:18px}
+.modal-backdrop.show{display:flex}
+.modal{background:#fff;border-radius:16px;max-width:560px;width:100%;max-height:82vh;overflow:auto;padding:24px 22px;position:relative}
+.modal h3{font-size:19px;margin-bottom:10px}
+.modal p{font-size:14.5px;color:#334155;margin-bottom:10px}
+.modal .close-x{position:absolute;top:12px;right:14px;background:#f1f5f9;border:0;border-radius:8px;width:34px;height:34px;font-size:18px;cursor:pointer;color:var(--text)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:12px 18px;border-radius:999px;font-size:14px;box-shadow:0 8px 24px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:.25s;z-index:200;max-width:92vw;text-align:center}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="brand" href="#top"><span class="mark">배</span><span><b>배관설비 <span>Hub</span></b><small>plumbinghub.github.io/</small></span></a>
+    <nav class="main-nav">
+      <a href="#calculators">계산기</a>
+      <a href="#reference">기준표</a>
+      <a href="#guides">가이드</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap">
+    <h1>급수·배수·펌프·온수기 <span>배관 계산기</span></h1>
+    <p>주택과 상업 건물, 공장 설비 현장에서 바로 쓰는 무료 배관 계산기입니다. 급수관경, 배수관경, 수압과 수두, 펌프 양정과 동력, 온수기 용량을 KS 기준과 한국 설비 조건(380V 3상 / 220V 단상, 60Hz)에 맞춰 브라우저에서 즉시 계산합니다. 입력한 값은 어디에도 전송되지 않습니다.</p>
+    <div class="badges">
+      <span class="badge">5개 계산기</span>
+      <span class="badge">KS 기준</span>
+      <span class="badge">380V / 220V · 60Hz</span>
+      <span class="badge">무료 · 가입 불필요</span>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+<section id="calculators">
+  <h2><span class="bar">|</span> 배관설비 계산기</h2>
+  <p class="section-sub">값을 입력하고 계산 버튼을 누르면 결과가 즉시 표시됩니다. 모든 계산은 브라우저 안에서만 이루어집니다.</p>
+
+  <div class="calc-grid">
+
+  <!-- ============ 1. 급수관경 ============ -->
+  <div class="card wide" id="calc-pipe-supply">
+    <div class="tag">급수관</div>
+    <h3>급수관경 계산기</h3>
+    <p class="desc">동시 사용 유량과 배관 길이, 관 재질에서 필요한 내경과 Hazen-Williams 마찰손실을 계산하고 KS 호칭경을 추천합니다.</p>
+    <div class="field-row">
+      <div class="field"><label>동시 사용 유량 Q (L/min)</label><input type="number" id="sQ" value="60" min="1" step="1"></div>
+      <div class="field"><label>배관 길이 (m)</label><input type="number" id="sL" value="30" min="1" step="1"></div>
+      <div class="field"><label>관 재질</label>
+        <select id="sMat"><option value="140">플라스틱관 (C = 140)</option><option value="130">강관 (C = 130)</option></select>
+      </div>
+      <div class="field"><label>목표 유속 (m/s)</label><input type="number" id="sV" value="1.5" min="0.5" max="3" step="0.1"></div>
+    </div>
+    <div class="btn-row"><button class="btn" id="sCalc" type="button">급수관경 계산</button></div>
+    <div class="results" id="sResults">
+      <h4>급수관경 계산 결과</h4>
+      <div class="stat-grid">
+        <div class="stat hero"><div class="k">추천 KS 호칭경</div><div class="v" id="sSize">—</div></div>
+        <div class="stat"><div class="k">필요 내경</div><div class="v" id="sNeed">—</div></div>
+        <div class="stat"><div class="k">선택 관경 내경</div><div class="v" id="sId">—</div></div>
+        <div class="stat"><div class="k">실제 유속</div><div class="v" id="sVel">—</div></div>
+        <div class="stat"><div class="k">마찰손실 수두</div><div class="v" id="sHf">—</div></div>
+        <div class="stat"><div class="k">마찰손실 수압</div><div class="v" id="sHp">—</div></div>
+      </div>
+      <div class="verdict ok" id="sVerdict">—</div>
+      <p class="formula">공식: 필요 내경 D = √(4·Q / π·v) · 마찰손실 h<sub>f</sub> = 10.67·L·Q<sup>1.852</sup> / (C<sup>1.852</sup>·d<sup>4.87</sup>) — Hazen-Williams 식 (Q는 m³/s, d는 m, L은 m). 급수관 적정 유속은 보통 1.0–2.0 m/s입니다.</p>
+      <p class="note">추정치입니다. 실제 설계에서는 밸브와 엘보 등 부속류의 국부 손실, 장래 증설 여유, 수격 작용을 함께 검토해야 합니다. 내경은 KS D 3507 스테인리스강관 대표값을 사용했습니다.</p>
+    </div>
+  </div>
+
+  <!-- ============ 2. 배수관경 ============ -->
+  <div class="card" id="calc-pipe-drain">
+    <div class="tag">배수관</div>
+    <h3>배수관경 계산기</h3>
+    <p class="desc">기구배수부하단위(FU)와 배관 구배, 수평관·수직관 구분으로 필요한 배수관경을 구합니다.</p>
+    <div class="field-row">
+      <div class="field"><label>기구배수부하단위 FU</label><input type="number" id="dFu" value="30" min="1" step="1"></div>
+      <div class="field"><label>배관 구배</label>
+        <select id="dSlope"><option value="50">1/50</option><option value="100" selected>1/100</option><option value="200">1/200</option></select>
+      </div>
+      <div class="field"><label>배관 종류</label>
+        <select id="dType"><option value="h">수평관</option><option value="v">수직관</option></select>
+      </div>
+    </div>
+    <div class="btn-row"><button class="btn" id="dCalc" type="button">배수관경 계산</button></div>
+    <div class="results" id="dResults">
+      <h4>배수관경 계산 결과</h4>
+      <div class="stat-grid">
+        <div class="stat hero"><div class="k">필요 관경</div><div class="v" id="dSize">—</div></div>
+        <div class="stat"><div class="k">허용 FU</div><div class="v" id="dAllow">—</div></div>
+        <div class="stat"><div class="k">유량 추정치</div><div class="v" id="dFlow">—</div></div>
+        <div class="stat"><div class="k">적용 구배</div><div class="v" id="dSlopeOut">—</div></div>
+        <div class="stat"><div class="k">여유율</div><div class="v" id="dMargin">—</div></div>
+      </div>
+      <div class="verdict ok" id="dVerdict">—</div>
+      <p class="formula">FU 기준 관경표(수평관): 3 FU → 40A, 6 → 50A, 14 → 75A, 35 → 100A, 70 → 125A, 140 → 150A, 300 → 200A. 수직관: 4 → 40A, 10 → 50A, 30 → 75A, 90 → 100A, 200 → 125A, 400 → 150A, 900 → 200A. 구배가 완만할수록 한 단계 큰 관경을 권장합니다.</p>
+      <p class="note">유량 추정치는 헌터 곡선 근사식 Q ≈ 7.5·√FU (L/min) 기준입니다. 실제 설계는 건축설비기준과 지자체 조례, 통기 방식에 따라 달라질 수 있습니다.</p>
+    </div>
+  </div>
+
+  <!-- ============ 3. 수압·수두 ============ -->
+  <div class="card" id="calc-pressure">
+    <div class="tag">수압 · 수두</div>
+    <h3>수압·수두 계산기</h3>
+    <p class="desc">수위 높이 차와 마찰손실 수두에서 가용 수압을 계산하고, 필요한 최저 수압과 비교합니다.</p>
+    <div class="field-row">
+      <div class="field"><label>수위 높이 차 (m)</label><input type="number" id="pH" value="20" min="0" step="0.5"></div>
+      <div class="field"><label>마찰손실 수두 (m)</label><input type="number" id="pLoss" value="5" min="0" step="0.5"></div>
+      <div class="field"><label>필요 최저 수압 (kPa)</label><input type="number" id="pMin" value="150" min="0" step="10"></div>
+    </div>
+    <div class="btn-row"><button class="btn" id="pCalc" type="button">수압 계산</button></div>
+    <div class="results" id="pResults">
+      <h4>수압 계산 결과</h4>
+      <div class="stat-grid">
+        <div class="stat hero"><div class="k">가용 수압</div><div class="v" id="pKpa">—</div></div>
+        <div class="stat"><div class="k">가용 수두</div><div class="v" id="pHead">—</div></div>
+        <div class="stat"><div class="k">수압 (kgf/cm²)</div><div class="v" id="pKgf">—</div></div>
+        <div class="stat"><div class="k">수압 (bar)</div><div class="v" id="pBar">—</div></div>
+        <div class="stat"><div class="k">최저 수압 대비 여유</div><div class="v" id="pMargin">—</div></div>
+      </div>
+      <div class="verdict ok" id="pVerdict">—</div>
+      <p class="formula">공식: 가용 수두 = 수위 높이 차 − 마찰손실 수두 · 수압 p = ρ·g·h (물 1 m 수두 ≈ 9.81 kPa ≈ 0.1 kgf/cm² ≈ 0.098 bar). 일반 수도전은 보통 100–150 kPa 이상에서 정상 작동합니다.</p>
+    </div>
+  </div>
+
+  <!-- ============ 4. 펌프 ============ -->
+  <div class="card" id="calc-pump">
+    <div class="tag">펌프</div>
+    <h3>펌프 양정·동력 계산기</h3>
+    <p class="desc">유량과 실양정, 배관 마찰손실, 펌프 효율에서 전양정과 축동력을 구하고 적정 모터 정격을 추천합니다.</p>
+    <div class="field-row">
+      <div class="field"><label>유량 Q (L/min)</label><input type="number" id="puQ" value="100" min="1" step="1"></div>
+      <div class="field"><label>실양정 (m)</label><input type="number" id="puStatic" value="15" min="0" step="0.5"></div>
+      <div class="field"><label>배관 마찰손실 (m)</label><input type="number" id="puLoss" value="5" min="0" step="0.5"></div>
+      <div class="field"><label>펌프 효율 (%)</label><input type="number" id="puEff" value="60" min="20" max="95" step="1"></div>
+      <div class="field"><label>하루 운전 시간 (h)</label><input type="number" id="puHours" value="8" min="0" max="24" step="0.5"></div>
+    </div>
+    <div class="btn-row"><button class="btn" id="puCalc" type="button">펌프 동력 계산</button></div>
+    <div class="results" id="puResults">
+      <h4>펌프 계산 결과</h4>
+      <div class="stat-grid">
+        <div class="stat hero"><div class="k">전양정</div><div class="v" id="puHead">—</div></div>
+        <div class="stat"><div class="k">축동력</div><div class="v" id="puKw">—</div></div>
+        <div class="stat"><div class="k">추천 모터 정격</div><div class="v" id="puMotor">—</div></div>
+        <div class="stat"><div class="k">월 전력량 추정치</div><div class="v" id="puKwh">—</div></div>
+        <div class="stat"><div class="k">유량 (m³/h)</div><div class="v" id="puM3h">—</div></div>
+      </div>
+      <p class="formula">공식: 전양정 H = 실양정 + 마찰손실 · 축동력 P = ρ·g·Q·H / η (ρ = 1,000 kg/m³, g = 9.81 m/s², η는 펌프 효율). 월 전력량은 축동력 × 하루 운전 시간 × 30일 기준입니다.</p>
+      <p class="note">모터 정격은 축동력 이상인 가장 작은 표준 정격입니다. 실제 선정에서는 NPSH(유효흡입수두)와 캐비테이션, 기동 방식, 여유율을 함께 검토해야 합니다.</p>
+    </div>
+  </div>
+
+  <!-- ============ 5. 온수기 ============ -->
+  <div class="card" id="calc-heater">
+    <div class="tag">온수기</div>
+    <h3>온수기 용량 계산기</h3>
+    <p class="desc">동시 사용 인원과 1인당 사용량, 급수·목표 온도에서 필요한 저장 탱크 용량과 히터 용량을 계산합니다.</p>
+    <div class="field-row">
+      <div class="field"><label>동시 사용 인원 (명)</label><input type="number" id="hPersons" value="4" min="1" step="1"></div>
+      <div class="field"><label>1인당 사용량 (L) <small>샤워 기준 40L</small></label><input type="number" id="hPer" value="40" min="1" step="1"></div>
+      <div class="field"><label>급수 온도 (°C)</label><input type="number" id="hCold" value="15" min="0" max="40" step="1"></div>
+      <div class="field"><label>목표 온도 (°C)</label><input type="number" id="hHot" value="55" min="20" max="90" step="1"></div>
+      <div class="field"><label>가열 시간 (h)</label><input type="number" id="hTime" value="1" min="0.25" step="0.25"></div>
+    </div>
+    <div class="btn-row"><button class="btn" id="hCalc" type="button">온수기 용량 계산</button></div>
+    <div class="results" id="hResults">
+      <h4>온수기 계산 결과</h4>
+      <div class="stat-grid">
+        <div class="stat hero"><div class="k">필요 저장 용량</div><div class="v" id="hVol">—</div></div>
+        <div class="stat"><div class="k">필요 히터 용량</div><div class="v" id="hKw">—</div></div>
+        <div class="stat"><div class="k">필요 열량 (kcal/h)</div><div class="v" id="hKcal">—</div></div>
+        <div class="stat"><div class="k">필요 열량 (kWh)</div><div class="v" id="hKwh">—</div></div>
+        <div class="stat"><div class="k">온도 상승폭</div><div class="v" id="hDt">—</div></div>
+      </div>
+      <div class="verdict ok" id="hVerdict">—</div>
+      <p class="formula">공식: 저장 용량 = 인원 × 1인당 사용량 · 필요 열량 Q = m·c·ΔT (c = 4.186 kJ/kg·°C) · 히터 용량(kW) = Q(kWh) ÷ 가열 시간(h) · 1 kW = 860 kcal/h.</p>
+      <p class="note">전기 온수기는 보통 220V 단상 전원을 사용합니다. 히터 용량이 크면 차단기와 전선 굵기를 함께 확인해야 하며, 보온이 잘 안 되면 실제 가열 시간이 늘어납니다.</p>
+    </div>
+  </div>
+
+  </div><!-- /calc-grid -->
+</section>
+
+<!-- ============ Reference table ============ -->
+<section id="reference">
+  <h2><span class="bar">|</span> KS 급수관 관경별 유량표</h2>
+  <p class="section-sub">KS D 3507 스테인리스강관 대표 내경 기준입니다. 유속 1.2 m/s와 1.5 m/s일 때의 통과 유량을 보여주며, 연결 가능 기구 수는 세면기·변기·샤워 등 일반 위생기구를 기준으로 한 대략적인 안내입니다.</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>호칭경</th><th>내경 (mm)</th><th>유량 @ 1.2 m/s (L/min)</th><th>유량 @ 1.5 m/s (L/min)</th><th>연결 가능 기구 수 (대략)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>15A</td><td>17.7</td><td>17.7</td><td>22.1</td><td>1대</td></tr>
+        <tr><td>20A</td><td>23.2</td><td>30.4</td><td>38.0</td><td>2대</td></tr>
+        <tr><td>25A</td><td>29.4</td><td>48.9</td><td>61.1</td><td>3대</td></tr>
+        <tr><td>32A</td><td>38.3</td><td>83.0</td><td>103.7</td><td>5대</td></tr>
+        <tr><td>40A</td><td>44.4</td><td>111.5</td><td>139.3</td><td>7대</td></tr>
+        <tr><td>50A</td><td>55.6</td><td>174.8</td><td>218.5</td><td>12대</td></tr>
+        <tr><td>65A</td><td>68.4</td><td>264.6</td><td>330.7</td><td>18대</td></tr>
+        <tr><td>80A</td><td>80.7</td><td>368.3</td><td>460.3</td><td>25대</td></tr>
+        <tr><td>100A</td><td>105.3</td><td>627.0</td><td>783.8</td><td>40대</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">유량 Q = 단면적 × 유속으로 계산했습니다. 급수관의 적정 유속은 보통 1.0–2.0 m/s이며, 유속이 너무 높으면 소음과 수격이 커지고, 너무 낮으면 관경이 과대해져 공사비가 늘어납니다. 실제 내경은 관종과 스케줄에 따라 다르므로 주문 전 제품 카탈로그를 확인하세요.</p>
+</section>
+
+<!-- ============ Guides ============ -->
+<section id="guides">
+  <h2><span class="bar">|</span> 배관설비 실무 가이드</h2>
+  <p class="section-sub">현장에서 바로 쓰는 배관 시공과 유지관리 안내입니다.</p>
+  <div class="guide-grid">
+    <div class="guide">
+      <div class="g-tag">급수 시공</div>
+      <h3>급수배관 시공 기초</h3>
+      <p>관종을 어떻게 고르고, 접합은 어떤 방식으로 하며, 고정 간격과 수압 시험은 어떻게 하는지 — 급수배관 시공의 기본을 정리했습니다. 잘못된 접합 하나가 건물 전체의 누수로 이어질 수 있는 만큼, 첫 단계부터 기준대로 시공하는 것이 중요합니다.</p>
+      <p class="guide-link"><a href="guides/geupsu-baegwan-sigong.html">자세히 보기 &rarr;</a></p>
+    </div>
+    <div class="guide">
+      <div class="g-tag">배수 · 악취</div>
+      <h3>배수 트랩과 악취 방지</h3>
+      <p>배수 트랩의 봉수(封水)가 깨지면 하수 냄새와 유해 가스가 실내로 들어옵니다. 트랩의 종류와 봉수 깊이, 통기 배관의 역할을 이해하고 악취 민원을 원천적으로 막는 방법을 설명합니다.</p>
+      <p class="guide-link"><a href="guides/baesu-teuraep.html">자세히 보기 &rarr;</a></p>
+    </div>
+    <div class="guide">
+      <div class="g-tag">진단 · 점검</div>
+      <h3>누수 탐지 방법</h3>
+      <p>보이지 않는 곳에서 새는 물은 수도요금 상승과 구조물 손상의 원인이 됩니다. 수량계 확인, 수압 시험, 청음 탐지, 열화상 카메라까지 — 단계별로 누수 위치를 좁혀가는 실무 방법을 정리했습니다.</p>
+      <p class="guide-link"><a href="guides/nusu-tamji.html">자세히 보기 &rarr;</a></p>
+    </div>
+    <div class="guide">
+      <div class="g-tag">겨울철 관리</div>
+      <h3>동파 방지와 겨울철 관리</h3>
+      <p>영하로 떨어지는 밤, 보온이 안 된 노출 배관은 하룻밤에도 얼어 터집니다. 보온재 선택과 시공 요령, 장기간 외출 시 배수 방법, 동파가 이미 발생한 뒤의 올바른 해빙 절차를 설명합니다.</p>
+      <p class="guide-link"><a href="guides/dongpa-bangji.html">자세히 보기 &rarr;</a></p>
+    </div>
+    <div class="guide">
+      <div class="g-tag">펌프 설비</div>
+      <h3>펌프 설치와 양정 계산</h3>
+      <p>펌프가 물을 못 빨아올리는 원인의 대부분은 설치에 있습니다. 흡입 양정과 NPSH, 캐비테이션의 원리, 배관과 기초 시공 요령, 시운전 절차를 단계별로 정리했습니다.</p>
+      <p class="guide-link"><a href="guides/peompeu-seolchi.html">자세히 보기 &rarr;</a></p>
+    </div>
+    <div class="guide">
+      <div class="g-tag">위생 · 수질</div>
+      <h3>수질과 위생 관리</h3>
+      <p>저수조를 제때 청소하지 않으면 수돗물 수질은 금세 나빠집니다. 저수조 청소 주기와 방법, 소독 기준, 수질 검사 항목, 옥내 급수관 위생 관리의 실무를 설명합니다.</p>
+      <p class="guide-link"><a href="guides/sujil-wisaeng.html">자세히 보기 &rarr;</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <h2><span class="bar">|</span> 자주 묻는 질문</h2>
+  <p class="section-sub">배관설비 계산과 시공에 대해 가장 자주 묻는 질문입니다.</p>
+  <div class="faq">
+    <div class="faq-item">
+      <button type="button">급수관 유속은 얼마가 적당한가요? <span class="chev">+</span></button>
+      <div class="answer">일반적으로 1.0–2.0 m/s가 적정합니다. 유속이 2.0 m/s를 넘으면 유수 소음과 수격 작용이 커지고, 1.0 m/s 미만이면 관경이 과대해져 공사비와 정체수 발생 가능성이 늘어납니다. 고층 건물이나 병원처럼 소음에 민감한 곳은 1.5 m/s 이하로 설계하는 것이 안전합니다.</div>
+    </div>
+    <div class="faq-item">
+      <button type="button">배수관 구배는 왜 중요한가요? <span class="chev">+</span></button>
+      <div class="answer">배수는 중력으로 흐르기 때문에 구배가 생명입니다. 구배가 너무 완만하면 고형물이 가라앉아 막히고, 너무 급하면 물만 먼저 흘러가 고형물이 남습니다. 보통 1/100 정도를 기준으로 하며, 관경이 작을수록 더 급한 구배(1/50)가 필요합니다. 이 계산기의 구배별 권고 관경을 참고하세요.</div>
+    </div>
+    <div class="faq-item">
+      <button type="button">최상층 수도 수압이 낮으면 어떻게 하나요? <span class="chev">+</span></button>
+      <div class="answer">먼저 수압·수두 계산기로 가용 수압을 확인하세요. 100 kPa 미만이면 수도전과 샤워 사용이 어렵습니다. 원인이 수도 본관 수압 자체라면 가압펌프나 옥상 물탱크를 검토해야 하고, 배관 마찰손실이 원인이라면 관경 확대나 노후관 교체가 해법입니다. 감압밸브가 잘못 설정된 경우도 있으니 점검해 보세요.</div>
+    </div>
+    <div class="faq-item">
+      <button type="button">펌프가 공회전하면서 물을 못 빨아올려요. <span class="chev">+</span></button>
+      <div class="answer">흡입 쪽 공기 유입이나 캐비테이션을 먼저 의심하세요. 흡입관 이음부 누기, 풋밸브 고장, 흡입 양정 초과가 흔한 원인입니다. 흡입관에 공기가 차 있으면 프라이밍(물 채우기)을 다시 하고, 흡입 수위가 펌프보다 너무 낮으면 펌프를 낮추거나 수중펌프로 바꾸는 것을 검토하세요. 자세한 내용은 펌프 설치 가이드를 참고하세요.</div>
+    </div>
+    <div class="faq-item">
+      <button type="button">온수기 용량은 어떻게 정하나요? <span class="chev">+</span></button>
+      <div class="answer">동시에 샤워하는 인원 수에 1인당 사용량(약 40L)을 곱한 값이 저장 탱크 용량의 기준입니다. 4인 가족이 동시에 샤워하면 약 160L가 필요하지만, 실제로는 사용 시간대가 엇갈리므로 동시 사용 인원을 현실적으로 잡는 것이 중요합니다. 가열 시간 안에 탱크 전체를 데울 수 있는 히터 용량은 온수기 용량 계산기로 확인하세요.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ About ============ -->
+<section id="about">
+  <div class="about">
+    <h2><span class="bar">|</span> 배관설비 Hub 소개</h2>
+    <p>배관설비 Hub는 설비 기술자와 현장 시공자, 건축주를 위한 무료 배관 계산기 사이트입니다. 급수관경과 배수관경, 수압과 수두, 펌프 양정과 동력, 온수기 용량을 KS 기준과 한국 설비 조건(380V 3상 / 220V 단상, 60Hz)에 맞춰 계산합니다. 모든 계산은 브라우저 안에서 이루어지며, 별도의 가입이나 설치가 필요 없습니다.</p>
+    <p><strong>면책 조항:</strong> 이 사이트의 모든 계산 결과는 참고용 추정치입니다. 실제 설계와 시공은 건축설비기준, KS 규격, 해당 지역 조례와 제조사의 설치 지침을 따라야 하며, 중요한 설비는 반드시 자격 있는 설비 기술자나 설계사무소의 검토를 받으세요. 이 계산 결과를 근거로 한 시공에 대해 배관설비 Hub는 책임을 지지 않습니다.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>배관설비 Hub</h4>
+        <p>무료 배관설비 계산기 — 급수관경, 배수관경, 수압·수두, 펌프 양정·동력, 온수기 용량. KS 기준 · 380V / 220V · 60Hz.</p>
+        <p style="margin-top:8px">plumbinghub.github.io/</p>
+      </div>
+      <div>
+        <h4>계산기</h4>
+        <ul>
+          <li><a href="#calc-pipe-supply">급수관경 계산기</a></li>
+          <li><a href="#calc-pipe-drain">배수관경 계산기</a></li>
+          <li><a href="#calc-pressure">수압·수두 계산기</a></li>
+          <li><a href="#calc-pump">펌프 양정·동력 계산기</a></li>
+          <li><a href="#calc-heater">온수기 용량 계산기</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>사이트</h4>
+        <ul>
+          <li><a href="#" data-modal="privacyModal">개인정보처리방침</a></li>
+          <li><a href="#" data-modal="aboutModal">소개</a></li>
+          <li><a href="#" data-modal="contactModal">문의</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 배관설비 Hub · 모든 계산은 브라우저 안에서 이루어집니다 · 결과는 추정치입니다. KS 규격과 제조사 자료, 지역 조례를 확인하세요.</div>
+  </div>
+</footer>
+
+<!-- Modals -->
+<div class="modal-backdrop" id="privacyModal">
+  <div class="modal">
+    <button class="close-x" data-close aria-label="닫기">×</button>
+    <h3>개인정보처리방침</h3>
+    <p>배관설비 Hub는 정적 웹사이트입니다. 개인정보를 수집·저장·전송하지 않습니다. 계산기에 입력한 모든 값은 브라우저 안에서만 처리되며 서버로 전송되지 않습니다.</p>
+    <p>이 사이트는 자체 쿠키나 분석 도구를 사용하지 않습니다. 향후 광고가 게재될 경우 제3자 광고 사업자가 쿠키를 사용할 수 있으며, 맞춤형 광고는 브라우저 설정이나 광고 사업자의 설정 페이지에서 거부할 수 있습니다.</p>
+  </div>
+</div>
+<div class="modal-backdrop" id="aboutModal">
+  <div class="modal">
+    <button class="close-x" data-close aria-label="닫기">×</button>
+    <h3>배관설비 Hub 소개</h3>
+    <p>배관설비 Hub는 급수관경, 배수관경, 수압과 수두, 펌프 양정과 동력, 온수기 용량을 계산하는 무료 브라우저 기반 도구입니다. KS 기준과 한국 설비 조건(380V 3상 / 220V 단상, 60Hz)에 맞춰 설계했습니다.</p>
+    <p>이 사이트는 참고용 도구이며, 제조사 설치 지침이나 자격 있는 설비 기술자의 판단을 대신하지 않습니다.</p>
+  </div>
+</div>
+<div class="modal-backdrop" id="contactModal">
+  <div class="modal">
+    <button class="close-x" data-close aria-label="닫기">×</button>
+    <h3>문의</h3>
+    <p>잘못된 계산값이나 새로운 계산기 요청이 있으면 이 사이트의 GitHub 저장소 <strong>github.com/motorwindinghub/plumbing-hub</strong>에 이슈를 등록해 주세요. 확인 후 반영하겠습니다.</p>
+    <p>현장 방문이 필요한 설비 문제는 보내지 마세요. 실제 시공과 수리는 반드시 지역의 자격 있는 설비 업체에 의뢰하세요.</p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+'use strict';
+
+/* ================= 순수 계산 함수 (테스트용으로 노출) ================= */
+var KS_PIPE_IDS = { 15: 17.7, 20: 23.2, 25: 29.4, 32: 38.3, 40: 44.4, 50: 55.6, 65: 68.4, 80: 80.7, 100: 105.3 };
+var KS_PIPE_SIZES = [15, 20, 25, 32, 40, 50, 65, 80, 100];
+var MOTOR_RATINGS = [0.4, 0.75, 1.5, 2.2, 3.7, 5.5, 7.5, 11, 15];
+
+function nextSize(list, need) {
+  for (var i = 0; i < list.length; i++) if (list[i] >= need) return list[i];
+  return list[list.length - 1];
+}
+
+/* 1. 급수관경: Q는 L/min, L은 m, C는 Hazen-Williams 계수, v는 목표 유속 m/s */
+function calcPipeSupply(qLpm, lenM, cFactor, vTarget) {
+  var q = qLpm / 60000; /* m3/s */
+  var needDm = Math.sqrt(4 * q / (Math.PI * vTarget)) * 1000; /* 필요 내경 mm */
+  var size = null, idMm = null;
+  for (var i = 0; i < KS_PIPE_SIZES.length; i++) {
+    if (KS_PIPE_IDS[KS_PIPE_SIZES[i]] >= needDm) { size = KS_PIPE_SIZES[i]; idMm = KS_PIPE_IDS[size]; break; }
+  }
+  if (size === null) { size = 100; idMm = KS_PIPE_IDS[100]; }
+  var dM = idMm / 1000;
+  var vActual = 4 * q / (Math.PI * dM * dM);
+  var hf = 10.67 * lenM * Math.pow(q, 1.852) / (Math.pow(cFactor, 1.852) * Math.pow(dM, 4.87));
+  var hpKpa = hf * 9.81;
+  var ok = vActual <= 2.0 && hf <= 5;
+  return { needDm: needDm, size: size, idMm: idMm, vActual: vActual,
+    hf: hf, hpKpa: hpKpa, ok: ok, overMax: needDm > KS_PIPE_IDS[100] };
+}
+
+/* 2. 배수관경: FU 표 */
+var DRAIN_H = [ { fu: 3, size: 40 }, { fu: 6, size: 50 }, { fu: 14, size: 75 },
+  { fu: 35, size: 100 }, { fu: 70, size: 125 }, { fu: 140, size: 150 }, { fu: 300, size: 200 } ];
+var DRAIN_V = [ { fu: 4, size: 40 }, { fu: 10, size: 50 }, { fu: 30, size: 75 },
+  { fu: 90, size: 100 }, { fu: 200, size: 125 }, { fu: 400, size: 150 }, { fu: 900, size: 200 } ];
+
+function calcPipeDrain(fu, slopeDenom, type) {
+  var table = type === 'v' ? DRAIN_V : DRAIN_H;
+  var row = null;
+  for (var i = 0; i < table.length; i++) {
+    if (fu <= table[i].fu) { row = table[i]; break; }
+  }
+  if (!row) row = table[table.length - 1];
+  var size = row.size, allowFu = row.fu;
+  var upsized = false;
+  if (slopeDenom >= 200 && size < 200) { /* 완만한 구배: 한 단계 큰 관경 */
+    var idx = KS_PIPE_SIZES.indexOf(size);
+    var next = [40, 50, 65, 75, 80, 100, 125, 150, 200];
+    var j = next.indexOf(size);
+    if (j >= 0 && j < next.length - 1) { size = next[j + 1]; upsized = true; }
+  }
+  var flowLpm = 7.5 * Math.sqrt(fu); /* Hunter 곡선 근사 */
+  var margin = allowFu > 0 ? (allowFu - fu) / allowFu * 100 : 0;
+  var overMax = fu > table[table.length - 1].fu;
+  return { size: size, allowFu: allowFu, flowLpm: flowLpm, marginPct: margin,
+    upsized: upsized, overMax: overMax };
+}
+
+/* 3. 수압·수두: 높이 차와 마찰손실(모두 m), 필요 최저 수압 kPa */
+function calcPressure(heightM, lossM, minKpa) {
+  var head = heightM - lossM;
+  var kpa = head * 9.81;
+  return { headM: head, kpa: kpa, kgf: kpa / 98.0665, bar: kpa / 100,
+    marginKpa: kpa - minKpa, ok: kpa >= 100 && kpa >= minKpa };
+}
+
+/* 4. 펌프 양정·동력: Q는 L/min, 효율은 % */
+function calcPump(qLpm, staticM, lossM, effPct, hoursPerDay) {
+  var q = qLpm / 60000; /* m3/s */
+  var head = staticM + lossM;
+  var eff = effPct / 100;
+  var kw = 1000 * 9.81 * q * head / eff / 1000;
+  var motor = nextSize(MOTOR_RATINGS, kw);
+  return { headM: head, kw: kw, motorKw: motor, m3h: qLpm * 0.06,
+    monthlyKwh: kw * hoursPerDay * 30 };
+}
+
+/* 5. 온수기 용량 */
+function calcHeater(persons, perPersonL, coldC, hotC, heatHours) {
+  var volL = persons * perPersonL;
+  var dt = hotC - coldC;
+  var energyKwh = volL * 4.186 * dt / 3600;
+  var kw = energyKwh / heatHours;
+  return { volL: volL, dt: dt, energyKwh: energyKwh, kw: kw,
+    kcalH: kw * 860, ok: kw <= 6 };
+}
+
+window.PH = { calcPipeSupply: calcPipeSupply, calcPipeDrain: calcPipeDrain,
+  calcPressure: calcPressure, calcPump: calcPump, calcHeater: calcHeater,
+  nextSize: nextSize, KS_PIPE_IDS: KS_PIPE_IDS };
+
+/* ================= DOM 연결 ================= */
+function $(id) { return document.getElementById(id); }
+function num(id, def) { var v = parseFloat($(id).value); return isNaN(v) ? def : v; }
+function fmt(n, dec) {
+  if (n === null || n === undefined || !isFinite(n)) return '—';
+  return Number(n).toLocaleString('ko-KR', { minimumFractionDigits: dec === undefined ? 2 : dec, maximumFractionDigits: dec === undefined ? 2 : dec });
+}
+var toastTimer = null;
+function showToast(msg) {
+  var t = $('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.classList.remove('show'); }, 3200);
+}
+function needOk(vals) {
+  for (var i = 0; i < vals.length; i++) if (!(vals[i] > 0)) { showToast('모든 항목에 양수를 입력해 주세요.'); return false; }
+  return true;
+}
+
+/* --- 1. 급수관경 --- */
+$('sCalc').addEventListener('click', function () {
+  var q = num('sQ', 0), len = num('sL', 0), c = parseFloat($('sMat').value), v = num('sV', 0);
+  if (!needOk([q, len, v])) return;
+  var r = calcPipeSupply(q, len, c, v);
+  $('sSize').textContent = r.size + 'A';
+  $('sNeed').textContent = fmt(r.needDm, 1) + ' mm';
+  $('sId').textContent = fmt(r.idMm, 1) + ' mm';
+  $('sVel').textContent = fmt(r.vActual, 2) + ' m/s';
+  $('sHf').textContent = fmt(r.hf, 2) + ' m';
+  $('sHp').textContent = fmt(r.hpKpa, 1) + ' kPa';
+  var verdict = $('sVerdict');
+  if (r.overMax) {
+    verdict.className = 'verdict bad';
+    verdict.textContent = '주의 — 필요 내경이 100A를 초과합니다. 유량을 나누거나 병렬 배관을 검토하세요.';
+  } else if (r.ok) {
+    verdict.className = 'verdict ok';
+    verdict.textContent = '적합 — 유속 ' + fmt(r.vActual, 2) + ' m/s, 마찰손실 ' + fmt(r.hf, 2) + ' m로 적정 범위입니다. ' + r.size + 'A 관을 사용하세요.';
+  } else {
+    verdict.className = 'verdict warn';
+    verdict.textContent = '검토 필요 — 유속 또는 마찰손실이 적정 범위를 벗어났습니다. 한 단계 큰 관경을 검토하세요.';
+  }
+  $('sResults').classList.add('show');
+});
+
+/* --- 2. 배수관경 --- */
+$('dCalc').addEventListener('click', function () {
+  var fu = num('dFu', 0), slope = parseInt($('dSlope').value, 10), type = $('dType').value;
+  if (!needOk([fu])) return;
+  var r = calcPipeDrain(fu, slope, type);
+  $('dSize').textContent = r.size + 'A';
+  $('dAllow').textContent = fmt(r.allowFu, 0) + ' FU';
+  $('dFlow').textContent = '≈ ' + fmt(r.flowLpm, 1) + ' L/min';
+  $('dSlopeOut').textContent = '1/' + slope;
+  $('dMargin').textContent = fmt(r.marginPct, 0) + ' %';
+  var verdict = $('dVerdict');
+  var typeTxt = type === 'v' ? '수직관' : '수평관';
+  if (r.overMax) {
+    verdict.className = 'verdict bad';
+    verdict.textContent = '주의 — FU가 표의 최대 허용값을 초과합니다. 배관을 분기하거나 더 큰 관경을 검토하세요.';
+  } else if (r.upsized) {
+    verdict.className = 'verdict warn';
+    verdict.textContent = '구배 1/200은 완만하므로 한 단계 큰 ' + r.size + 'A 관경을 권장합니다 (' + typeTxt + ' 기준).';
+  } else {
+    verdict.className = 'verdict ok';
+    verdict.textContent = '적합 — ' + typeTxt + ' 구배 1/' + slope + ' 기준 ' + r.size + 'A 관으로 ' + fmt(fu, 0) + ' FU를 처리할 수 있습니다.';
+  }
+  $('dResults').classList.add('show');
+});
+
+/* --- 3. 수압·수두 --- */
+$('pCalc').addEventListener('click', function () {
+  var h = num('pH', 0), loss = num('pLoss', 0), min = num('pMin', 0);
+  if (h < 0 || loss < 0 || min < 0) { showToast('음수는 입력할 수 없습니다.'); return; }
+  var r = calcPressure(h, loss, min);
+  $('pHead').textContent = fmt(r.headM, 1) + ' m';
+  $('pKpa').textContent = fmt(r.kpa, 1) + ' kPa';
+  $('pKgf').textContent = fmt(r.kgf, 2) + ' kgf/cm²';
+  $('pBar').textContent = fmt(r.bar, 2) + ' bar';
+  $('pMargin').textContent = (r.marginKpa >= 0 ? '+' : '') + fmt(r.marginKpa, 1) + ' kPa';
+  var verdict = $('pVerdict');
+  if (r.kpa < 100) {
+    verdict.className = 'verdict bad';
+    verdict.textContent = '수압 부족 — 가용 수압이 100 kPa 미만입니다. 가압펌프나 옥상 물탱크를 검토하세요.';
+  } else if (r.marginKpa < 0) {
+    verdict.className = 'verdict warn';
+    verdict.textContent = '여유 부족 — 최저 수압보다 ' + fmt(-r.marginKpa, 1) + ' kPa 모자랍니다. 마찰손실을 줄이거나 가압을 검토하세요.';
+  } else {
+    verdict.className = 'verdict ok';
+    verdict.textContent = '적합 — 가용 수압 ' + fmt(r.kpa, 1) + ' kPa로 최저 수압보다 ' + fmt(r.marginKpa, 1) + ' kPa 여유가 있습니다.';
+  }
+  $('pResults').classList.add('show');
+});
+
+/* --- 4. 펌프 --- */
+$('puCalc').addEventListener('click', function () {
+  var q = num('puQ', 0), st = num('puStatic', 0), loss = num('puLoss', 0), eff = num('puEff', 0), hrs = num('puHours', 0);
+  if (!needOk([q, eff])) return;
+  if (st < 0 || loss < 0 || hrs < 0) { showToast('음수는 입력할 수 없습니다.'); return; }
+  var r = calcPump(q, st, loss, eff, hrs);
+  $('puHead').textContent = fmt(r.headM, 1) + ' m';
+  $('puKw').textContent = fmt(r.kw, 2) + ' kW';
+  $('puMotor').textContent = fmt(r.motorKw, 2) + ' kW';
+  $('puKwh').textContent = fmt(r.monthlyKwh, 0) + ' kWh/월';
+  $('puM3h').textContent = fmt(r.m3h, 2) + ' m³/h';
+  $('puResults').classList.add('show');
+});
+
+/* --- 5. 온수기 --- */
+$('hCalc').addEventListener('click', function () {
+  var persons = num('hPersons', 0), per = num('hPer', 0), cold = num('hCold', 0), hot = num('hHot', 0), time = num('hTime', 0);
+  if (!needOk([persons, per, time])) return;
+  if (hot <= cold) { showToast('목표 온도는 급수 온도보다 높아야 합니다.'); return; }
+  var r = calcHeater(persons, per, cold, hot, time);
+  $('hVol').textContent = fmt(r.volL, 0) + ' L';
+  $('hKw').textContent = fmt(r.kw, 2) + ' kW';
+  $('hKcal').textContent = fmt(r.kcalH, 0) + ' kcal/h';
+  $('hKwh').textContent = fmt(r.energyKwh, 2) + ' kWh';
+  $('hDt').textContent = fmt(r.dt, 0) + ' °C';
+  var verdict = $('hVerdict');
+  if (r.ok) {
+    verdict.className = 'verdict ok';
+    verdict.textContent = '적합 — ' + fmt(r.volL, 0) + ' L 탱크와 ' + fmt(r.kw, 2) + ' kW 히터로 ' + fmt(time, 2) + '시간 안에 가열할 수 있습니다. (일반 가정용 220V 회로는 3 kW 이하 권장)';
+  } else {
+    verdict.className = 'verdict warn';
+    verdict.textContent = '검토 필요 — 필요 히터 용량이 ' + fmt(r.kw, 2) + ' kW로 큽니다. 가열 시간을 늘리거나 탱크를 나누는 것을 검토하세요.';
+  }
+  $('hResults').classList.add('show');
+});
+
+/* --- FAQ 아코디언 --- */
+document.querySelectorAll('.faq-item button').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var item = btn.parentElement;
+    var wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function (i) { i.classList.remove('open'); });
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+/* --- 모달 --- */
+document.querySelectorAll('[data-modal]').forEach(function (link) {
+  link.addEventListener('click', function (e) {
+    e.preventDefault();
+    $(link.getAttribute('data-modal')).classList.add('show');
+  });
+});
+document.querySelectorAll('.modal-backdrop').forEach(function (bd) {
+  bd.addEventListener('click', function (e) { if (e.target === bd) bd.classList.remove('show'); });
+  bd.querySelectorAll('[data-close]').forEach(function (b) {
+    b.addEventListener('click', function () { bd.classList.remove('show'); });
+  });
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') document.querySelectorAll('.modal-backdrop.show').forEach(function (bd) { bd.classList.remove('show'); });
+});
+})();
+</script>
+</body>
+</html>
