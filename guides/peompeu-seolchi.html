@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>펌프 설치와 양정 계산 — 배관설비 Hub</title>
+<meta name="description" content="펌프가 물을 못 빨아올리는 이유부터 흡입 양정과 NPSH, 캐비테이션, 배관과 기초 시공, 시운전 절차까지 현장 기준으로 정리했습니다.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+:root{--navy:#0f172a;--navy2:#1e293b;--amber:#f59e0b;--amber-dark:#d97706;--amber-bg:#fef3c7;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--green:#15803d;--green-bg:#dcfce7;--red:#b91c1c;--red-bg:#fee2e2;--radius:14px;--shadow:0 1px 3px rgba(15,23,42,.08),0 4px 14px rgba(15,23,42,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+a{color:var(--amber-dark)}
+header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.header-in{display:flex;align-items:center;gap:14px;padding:13px 16px;max-width:1080px;margin:0 auto;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;flex:1;min-width:200px}
+.brand .mark{width:38px;height:38px;border-radius:9px;background:var(--amber);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;flex:none}
+.brand b{font-size:19px;letter-spacing:.2px}
+.brand b span{color:var(--amber)}
+.brand small{display:block;font-size:11.5px;color:#94a3b8;font-weight:400}
+nav.main-nav{display:flex;gap:4px;flex-wrap:wrap}
+nav.main-nav a{color:#cbd5e1;text-decoration:none;font-size:14px;font-weight:600;padding:8px 11px;border-radius:8px}
+nav.main-nav a:hover{background:var(--navy2);color:#fff}
+.article{padding:26px 0 12px}
+.back{margin-bottom:10px}
+.back a{font-weight:700;text-decoration:none}
+.back a:hover{text-decoration:underline}
+.crumb{font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.article h1{font-size:clamp(26px,4.5vw,34px);line-height:1.25;margin-bottom:10px}
+.lede{font-size:17px;color:#334155;margin-bottom:22px}
+.article h2{font-size:21px;margin:28px 0 8px;padding-top:6px;border-top:2px solid var(--amber);display:inline-block}
+.article h3{font-size:17px;margin:18px 0 6px}
+.article p{font-size:15.5px;color:#1e293b;margin-bottom:12px}
+.article ul,.article ol{margin:0 0 14px 22px;font-size:15.5px;color:#1e293b}
+.article li{margin-bottom:6px}
+.article table{border-collapse:collapse;width:100%;font-size:14px;margin:12px 0 16px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.article th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px}
+.article td{padding:9px 12px;border-bottom:1px solid var(--border)}
+.article tr:nth-child(even) td{background:#f8fafc}
+.formula{font-size:13.5px;color:var(--muted);background:#fff;border:1px dashed var(--border);border-radius:8px;padding:10px 12px;margin:12px 0}
+.formula code{color:var(--navy);font-weight:600}
+.safety{background:var(--red-bg);border-left:4px solid var(--red);border-radius:10px;padding:14px 16px;margin:22px 0;font-size:14.5px;color:#7f1d1d}
+.related{background:var(--amber-bg);border:1px solid #fde68a;border-radius:12px;padding:16px 18px;margin:22px 0}
+.related h3{font-size:15px;margin:0 0 8px}
+.related ul{margin:0 0 0 20px}
+.related li{margin-bottom:4px}
+footer{background:var(--navy);color:#94a3b8;margin-top:44px;padding:30px 0 26px}
+footer .cols{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:640px){footer .cols{grid-template-columns:2fr 1fr 1fr}}
+footer h4{color:#fff;font-size:15px;margin-bottom:10px}
+footer p,footer a{font-size:13.5px;color:#94a3b8;text-decoration:none}
+footer a:hover{color:#fff}
+footer ul{list-style:none}
+footer li{margin-bottom:6px}
+.copy{border-top:1px solid #1e293b;margin-top:22px;padding-top:16px;font-size:12.5px;text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="brand" href="../index.html"><span class="mark">배</span><span><b>배관설비 <span>Hub</span></b><small>plumbinghub.github.io/</small></span></a>
+    <nav class="main-nav">
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#reference">기준표</a>
+      <a href="../index.html#guides">가이드</a>
+      <a href="../index.html#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap article">
+  <p class="back"><a href="../index.html">&larr; 배관설비 Hub로 돌아가기</a></p>
+  <p class="crumb">가이드 / 펌프 설비</p>
+  <h1>펌프 설치와 양정 계산</h1>
+  <p class="lede">펌프가 물을 못 빨아올리는 원인의 대부분은 펌프 자체가 아니라 설치에 있습니다. 흡입관이 너무 길거나, 흡입 양정이 한계를 넘었거나, 배관에 공기가 차 있으면 아무리 좋은 펌프도 제 성능을 내지 못합니다. 이 글은 양정 계산의 기본부터 흡입 조건, 캐비테이션, 배관과 기초 시공, 시운전까지 펌프 설치의 실무를 정리한 것입니다.</p>
+
+  <h2>양정 계산의 기본</h2>
+  <p>펌프를 고르려면 먼저 필요한 양정을 알아야 합니다. 전양정은 실양정과 마찰손실, 그리고 토출에 필요한 잔여 압력 수두를 합한 값입니다. 실양정은 흡입 수위에서 토출 수위까지의 높이 차이이고, 마찰손실은 배관과 밸브, 엘보를 지나면서 잃는 수두입니다. 예를 들어 지하 물탱크에서 옥상 물탱크까지 물을 올리는 경우, 높이 차이가 20미터이고 배관 마찰손실이 5미터라면 전양정은 25미터가 됩니다. 여기에 토출 쪽에서 필요한 최소 압력이 있으면 그에 해당하는 수두를 더합니다.</p>
+  <p>양정이 정해지면 축동력을 계산합니다. 축동력은 유량과 양정, 펌프 효율로 정해지며, 공식은 P = ρ·g·Q·H / η 입니다. 이 사이트의 펌프 양정·동력 계산기에 유량과 실양정, 마찰손실을 입력하면 전양정과 축동력, 추천 모터 정격을 바로 확인할 수 있습니다. 모터 정격은 축동력보다 한 단계 큰 표준 정격을 선택하는 것이 원칙입니다. 펌프 성능 곡선도 함께 확인해야 합니다. 펌프는 양정이 높아질수록 유량이 줄어드는 특성이 있으므로, 필요한 유량과 양정이 성능 곡선상의 효율이 가장 좋은 지점 근처에 오는 펌프를 고르는 것이 중요합니다.</p>
+
+  <h2>펌프의 종류와 선택</h2>
+  <p>급수 설비에서 가장 많이 쓰이는 펌프는 원심 펌프입니다. 원심 펌프는 임펠러의 회전으로 물을 밀어내는 방식으로, 구조가 간단하고 유량 조절이 쉬우며, 급수와 배수, 순환 등 다양한 용도에 쓰입니다. 원심 펌프 중에서도 단단 흡입 펌프와 양흡입 펌프, 다단 펌프가 있으며, 양정이 높을수록 다단 펌프를 씁니다. 수중 펌프는 펌프 자체를 물속에 넣어 쓰는 방식으로, 흡입 양정 문제가 없어 깊은 우물이나 지하 물탱크에서 많이 쓰입니다. 자흡식 펌프는 흡입관에 물이 없어도 스스로 물을 빨아올릴 수 있어, 프라이밍이 어려운 곳에서 유용합니다.</p>
+  <p>펌프를 고를 때는 유량과 양정 외에도 액체의 성질을 봐야 합니다. 온수가 뜨거우면 캐비테이션 위험이 커지고, 고형물이 섞인 오수는 임펠러가 막히지 않는 구조가 필요합니다. 부식성 액체에는 재질을 따로 골라야 합니다. 또한 전원 조건도 확인해야 합니다. 한국에서는 소형 펌프는 220볼트 단상, 중대형 펌프는 380볼트 3상을 씁니다. 3상 펌프는 기동 전류가 크므로, 기동 방식과 차단기 용량을 함께 검토해야 합니다. 펌프 제조사의 성능 곡선과 NPSH 요구값을 반드시 확인하고, 카탈로그 값만으로 선정하지 않는 것이 좋습니다.</p>
+
+  <h2>NPSH와 캐비테이션</h2>
+  <p>캐비테이션은 펌프 고장의 가장 흔한 원인 중 하나입니다. 펌프 흡입 쪽의 압력이 물의 증기압보다 낮아지면 물속에 기포가 생기고, 이 기포가 임펠러의 고압 구간에서 터지면서 임펠러 표면을 조금씩 갉아먹습니다. 캐비테이션이 일어나면 펌프에서 자갈이 부딪히는 듯한 소음이 나고, 진동이 커지며, 유량과 양정이 떨어집니다. 오래 두면 임펠러가 벌집처럼 파이고, 심하면 펌프가 파손됩니다. 캐비테이션을 막으려면 펌프에 필요한 NPSH보다 현장에서 확보되는 NPSH가 커야 합니다.</p>
+  <p>현장 NPSH는 흡입 수위의 높이와 대기압, 물의 온도, 흡입 배관의 마찰손실로 정해집니다. 흡입 수위가 펌프보다 낮을수록, 물이 뜨거울수록, 흡입 배관이 길고 구부러진 곳이 많을수록 현장 NPSH는 작아집니다. 그래서 흡입 배관은 짧고 굵게, 굴곡은 적게 만드는 것이 원칙입니다. 흡입 양정이 한계를 넘으면 펌프를 낮추거나 수중 펌프로 바꾸는 것을 검토해야 합니다. 온수가 뜨거운 경우에도 캐비테이션 위험이 커지므로, 온수 순환 펌프는 흡입 쪽 압력을 충분히 확보할 수 있는 위치에 설치해야 합니다.</p>
+  <table>
+    <tr><th>항목</th><th>내용</th><th>비고</th></tr>
+    <tr><td>전양정</td><td>실양정 + 마찰손실 + 잔여 수두</td><td>펌프 선정의 기준</td></tr>
+    <tr><td>실양정</td><td>흡입 수위와 토출 수위의 높이 차</td><td>현장 실측 필요</td></tr>
+    <tr><td>마찰손실</td><td>배관, 밸브, 엘보의 손실 합계</td><td>관경이 클수록 작아짐</td></tr>
+    <tr><td>필요 NPSH</td><td>펌프 제조사가 제시하는 값</td><td>성능 곡선에서 확인</td></tr>
+    <tr><td>현장 NPSH</td><td>흡입 수위, 수온, 흡입 손실로 결정</td><td>필요 NPSH보다 커야 함</td></tr>
+    <tr><td>축동력</td><td>ρ·g·Q·H / η</td><td>모터 정격 선정 기준</td></tr>
+  </table>
+  <p>캐비테이션 소음이 들리면 펌프를 계속 운전하지 말고 원인을 찾아야 합니다. 토출 밸브를 조금 닫아 유량을 줄이면 일시적으로 소음이 줄어들 수 있지만, 이는 근본 해결이 아닙니다. 흡입 밸브가 잠겨 있거나, 흡입관에 공기가 차 있거나, 스트레이너가 막혀 있는지부터 확인합니다. 그래도 해결되지 않으면 흡입 배관을 굵게 하거나 펌프 위치를 낮추는 공사가 필요합니다. 캐비테이션을 방치하면 임펠러 교체 비용과 설비 정지 손실이 훨씬 커집니다.</p>
+
+  <h2>흡입 배관과 토출 배관 시공</h2>
+  <p>흡입 배관은 펌프 성능을 좌우하므로 특히 신경 써야 합니다. 흡입 배관은 토출 배관보다 한 단계 굵게 잡는 것이 일반적이며, 길이는 되도록 짧게, 굴곡은 되도록 적게 만듭니다. 흡입 배관에 공기 주머니가 생기지 않도록, 배관은 펌프 쪽으로 올라가는 구배를 주지 말고 수위 쪽으로 내려가는 구배를 줍니다. 배관 중간이 볼록하게 솟으면 그곳에 공기가 고여 펌프가 물을 못 빨아올립니다. 흡입관 끝에는 풋밸브를 달아 물이 빠져나가지 않도록 하고, 스트레이너를 달아 이물질이 펌프에 들어가는 것을 막습니다.</p>
+  <p>토출 배관에는 체크밸브와 게이트밸브를 설치합니다. 체크밸브는 펌프가 멈췄을 때 물이 역류해 임펠러가 역회전하는 것을 막고, 게이트밸브는 유량 조절과 정비 시 차단을 위해 필요합니다. 체크밸브는 펌프 바로 뒤에, 게이트밸브는 그 뒤에 설치하는 것이 일반적입니다. 토출 배관에도 압력계를 달아 운전 중 양정을 확인할 수 있게 합니다. 배관 지지대도 중요합니다. 펌프에 배관 하중이 직접 걸리면 펌프 축이 틀어져 진동과 누수의 원인이 되므로, 배관은 별도의 지지대로 받치고 펌프 연결부에는 플렉시블 조인트를 넣어 진동을 차단하는 것이 좋습니다.</p>
+
+  <h2>기초와 방진, 전기 결선</h2>
+  <p>펌프 기초는 진동과 소음을 줄이는 데 중요합니다. 콘크리트 기초 위에 방진 고무나 스프링 마운트를 놓고 그 위에 펌프를 올립니다. 기초가 약하면 펌프 진동이 건물 구조로 전달되어 소음 민원이 생깁니다. 펌프와 모터의 축 정렬도 정확히 맞춰야 합니다. 축이 틀어지면 베어링이 빨리 닳고 진동이 커집니다. 커플링 가드는 반드시 장착하고, 회전부에 손이 닿지 않도록 합니다. 펌프 주변에는 정비 공간을 충분히 확보해야 합니다. 임펠러나 베어링을 교체할 때 펌프를 들어낼 공간이 없으면 정비 자체가 어려워집니다.</p>
+  <p>전기 결선에서는 전원 전압과 회전 방향을 확인하는 것이 가장 중요합니다. 3상 펌프는 결선 순서가 바뀌면 역회전하므로, 시운전 전에 회전 방향을 반드시 확인해야 합니다. 역회전 상태로 운전하면 유량이 나오지 않고 펌프가 과열됩니다. 과부하 계전기는 모터 정격 전류에 맞게 설정하고, 누전차단기와 접지도 확인합니다. 펌프 제어반에는 수위 센서와 연동된 자동 운전 회로가 있는 경우가 많으므로, 자동과 수동 모드를 모두 시험해 보고, 수위 이상 시 경보가 울리는지도 확인해야 합니다.</p>
+
+  <h2>시운전 절차</h2>
+  <ol>
+    <li><strong>설치 상태를 점검합니다.</strong> 기초 볼트, 축 정렬, 커플링 가드, 배관 지지대, 밸브 개폐 상태를 확인합니다.</li>
+    <li><strong>흡입관에 물을 채웁니다.</strong> 프라이밍을 통해 흡입관과 펌프 케이싱 안의 공기를 빼고 물을 채웁니다. 풋밸브가 정상인지 확인합니다.</li>
+    <li><strong>회전 방향을 확인합니다.</strong> 모터를 잠깐만 돌려 회전 방향이 화살표와 같은지 확인합니다. 역회전이면 전원 결선을 바꿉니다.</li>
+    <li><strong>토출 밸브를 조금 연 상태에서 기동합니다.</strong> 밸브를 완전히 닫은 상태로 오래 운전하면 펌프가 과열되므로, 밸브를 조금 연 뒤 기동합니다.</li>
+    <li><strong>압력과 전류를 측정합니다.</strong> 토출 압력계와 전류계 값을 기록하고, 정격 전류를 넘지 않는지 확인합니다.</li>
+    <li><strong>밸브를 서서히 열어 정상 유량을 맞춥니다.</strong> 유량과 압력이 설계값과 맞는지 확인하고, 소음과 진동이 없는지 점검합니다.</li>
+    <li><strong>30분 이상 운전하며 상태를 관찰합니다.</strong> 베어링 온도, 누수, 진동, 소음을 확인하고 이상이 없으면 정상 운전에 들어갑니다.</li>
+  </ol>
+  <p>시운전 중 캐비테이션 소음이 들리거나 전류가 정격을 넘으면 즉시 정지하고 원인을 찾아야 합니다. 시운전 기록은 압력과 전류, 유량, 운전 시간을 포함해 보관하고, 정기 점검 시 비교 자료로 활용합니다. 펌프는 설치보다 유지관리가 더 중요합니다. 베어링 윤활과 패킹 점검, 스트레이너 청소, 진동 측정을 주기적으로 실시하면 고장을 미리 막을 수 있습니다.</p>
+
+  <h2>흔한 고장</h2>
+  <ul>
+    <li><strong>물을 못 빨아올림:</strong> 흡입관 공기 유입, 풋밸브 고장, 흡입 양정 초과가 원인입니다. 프라이밍을 다시 하고 흡입관을 점검합니다.</li>
+    <li><strong>캐비테이션 소음:</strong> 흡입 압력 부족이 원인입니다. 흡입 밸브와 스트레이너를 확인하고, 흡입 배관을 굵게 합니다.</li>
+    <li><strong>유량 부족:</strong> 임펠러 마모, 역회전, 토출 배관 막힘이 원인입니다. 회전 방향과 임펠러 상태를 확인합니다.</li>
+    <li><strong>과전류 트립:</strong> 베어링 고착, 임펠러 이물질, 과도한 유량이 원인입니다. 전류와 함께 진동을 측정합니다.</li>
+    <li><strong>진동과 소음:</strong> 축 정렬 불량, 기초 약화, 캐비테이션이 원인입니다. 축 정렬과 기초 상태를 점검합니다.</li>
+    <li><strong>패킹 누수:</strong> 패킹 마모가 원인입니다. 패킹을 교체하고, 메커니컬 씰은 손상 시 교체합니다.</li>
+  </ul>
+
+  
+  <h2>펌프 정기 점검과 수명 연장</h2>
+  <p>펌프는 설치 후 방치하면 언젠가 갑자기 멈춥니다. 정기 점검은 고장을 미리 잡는 가장 저렴한 방법입니다. 매월에는 운전 소음과 진동, 베어링 온도, 누수 여부를 확인하고, 토출 압력과 전류를 기록해 평소 값과 비교합니다. 압력이 서서히 떨어지고 있다면 임펠러 마모나 배관 막힘을 의심해야 하고, 전류가 서서히 올라가고 있다면 베어링 마모나 이물질 유입을 의심해야 합니다. 기록을 남기면 변화 추이를 볼 수 있어 고장을 예측할 수 있습니다. 스트레이너는 분기별로 청소하고, 패킹이나 메커니컬 씰의 누수량을 점검해 누수가 늘면 교체 시기를 판단합니다.</p>
+  <p>베어링 윤활은 펌프 수명을 좌우합니다. 윤활유나 그리스는 제조사에서 정한 종류와 양, 주기를 지켜야 하며, 너무 많이 넣는 것도 과열의 원인이 됩니다. 커플링 고무와 볼트도 정기적으로 확인하고, 축 정렬은 1년에 한 번 측정해 틀어짐이 있으면 다시 맞춥니다. 예비 펌프가 있는 설비에서는 주 펌프와 예비 펌프를 주기적으로 교대 운전해 한쪽만 계속 돌지 않도록 해야 합니다. 오래 멈춰 있던 펌프는 축이 고착되기 쉬우므로, 주기적으로 손으로 축을 돌려보고 시운전하는 것이 좋습니다. 펌프실은 청결하게 유지하고, 펌프 주변에 물건을 쌓아두지 않아야 정비와 점검이 수월합니다.</p>
+
+  <h2>자주 묻는 질문</h2>
+  <h3>펌프가 공회전하면서 물을 못 빨아올려요.</h3>
+  <p>흡입 쪽 공기 유입이 가장 흔한 원인입니다. 흡입관 이음부, 풋밸브, 스트레이너를 점검하고 프라이밍을 다시 하세요. 흡입 수위가 펌프보다 너무 낮으면 흡입 양정을 초과한 것이므로 펌프를 낮추거나 수중 펌프로 교체해야 합니다.</p>
+  <h3>펌프에서 자갈 소리가 나요.</h3>
+  <p>캐비테이션입니다. 흡입 압력이 부족해 기포가 생기고 터지는 소리입니다. 흡입 밸브가 잠겨 있거나 스트레이너가 막혔는지 먼저 확인하세요. 해결되지 않으면 흡입 배관을 굵게 하거나 펌프 위치를 낮추는 공사가 필요합니다.</p>
+  <h3>모터 정격은 어떻게 정하나요?</h3>
+  <p>전양정과 유량에서 축동력을 계산한 뒤, 그보다 한 단계 큰 표준 정격을 선택합니다. 이 사이트의 펌프 양정·동력 계산기에 값을 입력하면 축동력과 추천 모터 정격, 월 전력량을 바로 확인할 수 있습니다. 여유를 너무 크게 잡으면 효율이 떨어지므로 적정 정격을 고르는 것이 중요합니다.</p>
+
+  <div class="safety"><strong>안전 주의:</strong> 펌프 시운전 전에는 반드시 회전 방향과 전원 전압을 확인하고, 커플링 가드를 장착하세요. 운전 중에는 회전부에 손을 대지 말고, 누전차단기와 접지 상태를 점검하세요. 고온의 온수 펌프는 화상 위험이 있으므로 배관 표면 온도를 확인한 뒤 작업하세요.</div>
+
+  <div class="related">
+    <h3>관련 계산기</h3>
+    <ul>
+      <li><a href="../index.html#calc-pump">펌프 양정·동력 계산기</a> — 전양정과 축동력, 추천 모터 정격</li>
+      <li><a href="../index.html#calc-pipe-supply">급수관경 계산기</a> — 펌프 토출 배관의 관경과 마찰손실</li>
+      <li><a href="../index.html#calc-pressure">수압·수두 계산기</a> — 펌프 토출 수압 확인</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>배관설비 Hub</h4>
+        <p>무료 배관설비 계산기 — 급수관경, 배수관경, 수압·수두, 펌프 양정·동력, 온수기 용량. KS 기준 · 380V / 220V · 60Hz.</p>
+        <p style="margin-top:8px">plumbinghub.github.io/</p>
+      </div>
+      <div>
+        <h4>계산기</h4>
+        <ul>
+          <li><a href="../index.html#calc-pipe-supply">급수관경 계산기</a></li>
+          <li><a href="../index.html#calc-pipe-drain">배수관경 계산기</a></li>
+          <li><a href="../index.html#calc-pressure">수압·수두 계산기</a></li>
+          <li><a href="../index.html#calc-pump">펌프 양정·동력 계산기</a></li>
+          <li><a href="../index.html#calc-heater">온수기 용량 계산기</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>가이드</h4>
+        <ul>
+          <li><a href="geupsu-baegwan-sigong.html">급수배관 시공 기초</a></li>
+          <li><a href="baesu-teuraep.html">배수 트랩과 악취 방지</a></li>
+          <li><a href="nusu-tamji.html">누수 탐지 방법</a></li>
+          <li><a href="dongpa-bangji.html">동파 방지와 겨울철 관리</a></li>
+          <li><a href="peompeu-seolchi.html">펌프 설치와 양정 계산</a></li>
+          <li><a href="sujil-wisaeng.html">수질과 위생 관리</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 배관설비 Hub · 모든 계산은 브라우저 안에서 이루어집니다 · 결과는 추정치입니다. KS 규격과 제조사 자료, 지역 조례를 확인하세요.</div>
+  </div>
+</footer>
+
+</body>
+</html>

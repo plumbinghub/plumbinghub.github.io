@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>배수 트랩과 악취 방지 — 배관설비 Hub</title>
+<meta name="description" content="배수 트랩의 봉수 원리와 종류, 봉수 파괴 원인, 통기 배관의 역할과 악취 민원 해결 방법을 현장 기준으로 정리했습니다.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+:root{--navy:#0f172a;--navy2:#1e293b;--amber:#f59e0b;--amber-dark:#d97706;--amber-bg:#fef3c7;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--green:#15803d;--green-bg:#dcfce7;--red:#b91c1c;--red-bg:#fee2e2;--radius:14px;--shadow:0 1px 3px rgba(15,23,42,.08),0 4px 14px rgba(15,23,42,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+a{color:var(--amber-dark)}
+header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.header-in{display:flex;align-items:center;gap:14px;padding:13px 16px;max-width:1080px;margin:0 auto;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;flex:1;min-width:200px}
+.brand .mark{width:38px;height:38px;border-radius:9px;background:var(--amber);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;flex:none}
+.brand b{font-size:19px;letter-spacing:.2px}
+.brand b span{color:var(--amber)}
+.brand small{display:block;font-size:11.5px;color:#94a3b8;font-weight:400}
+nav.main-nav{display:flex;gap:4px;flex-wrap:wrap}
+nav.main-nav a{color:#cbd5e1;text-decoration:none;font-size:14px;font-weight:600;padding:8px 11px;border-radius:8px}
+nav.main-nav a:hover{background:var(--navy2);color:#fff}
+.article{padding:26px 0 12px}
+.back{margin-bottom:10px}
+.back a{font-weight:700;text-decoration:none}
+.back a:hover{text-decoration:underline}
+.crumb{font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.article h1{font-size:clamp(26px,4.5vw,34px);line-height:1.25;margin-bottom:10px}
+.lede{font-size:17px;color:#334155;margin-bottom:22px}
+.article h2{font-size:21px;margin:28px 0 8px;padding-top:6px;border-top:2px solid var(--amber);display:inline-block}
+.article h3{font-size:17px;margin:18px 0 6px}
+.article p{font-size:15.5px;color:#1e293b;margin-bottom:12px}
+.article ul,.article ol{margin:0 0 14px 22px;font-size:15.5px;color:#1e293b}
+.article li{margin-bottom:6px}
+.article table{border-collapse:collapse;width:100%;font-size:14px;margin:12px 0 16px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.article th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px}
+.article td{padding:9px 12px;border-bottom:1px solid var(--border)}
+.article tr:nth-child(even) td{background:#f8fafc}
+.formula{font-size:13.5px;color:var(--muted);background:#fff;border:1px dashed var(--border);border-radius:8px;padding:10px 12px;margin:12px 0}
+.formula code{color:var(--navy);font-weight:600}
+.safety{background:var(--red-bg);border-left:4px solid var(--red);border-radius:10px;padding:14px 16px;margin:22px 0;font-size:14.5px;color:#7f1d1d}
+.related{background:var(--amber-bg);border:1px solid #fde68a;border-radius:12px;padding:16px 18px;margin:22px 0}
+.related h3{font-size:15px;margin:0 0 8px}
+.related ul{margin:0 0 0 20px}
+.related li{margin-bottom:4px}
+footer{background:var(--navy);color:#94a3b8;margin-top:44px;padding:30px 0 26px}
+footer .cols{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:640px){footer .cols{grid-template-columns:2fr 1fr 1fr}}
+footer h4{color:#fff;font-size:15px;margin-bottom:10px}
+footer p,footer a{font-size:13.5px;color:#94a3b8;text-decoration:none}
+footer a:hover{color:#fff}
+footer ul{list-style:none}
+footer li{margin-bottom:6px}
+.copy{border-top:1px solid #1e293b;margin-top:22px;padding-top:16px;font-size:12.5px;text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="brand" href="../index.html"><span class="mark">배</span><span><b>배관설비 <span>Hub</span></b><small>plumbinghub.github.io/</small></span></a>
+    <nav class="main-nav">
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#reference">기준표</a>
+      <a href="../index.html#guides">가이드</a>
+      <a href="../index.html#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap article">
+  <p class="back"><a href="../index.html">&larr; 배관설비 Hub로 돌아가기</a></p>
+  <p class="crumb">가이드 / 배수 · 악취</p>
+  <h1>배수 트랩과 악취 방지</h1>
+  <p class="lede">화장실에서 올라오는 하수 냄새는 대부분 배수 트랩의 봉수가 깨졌다는 신호입니다. 트랩은 작은 부품이지만, 그 안에 고인 물 한 줌이 하수관의 악취와 유해 가스, 해충이 실내로 들어오는 것을 막는 유일한 장벽입니다. 이 글은 트랩이 어떻게 작동하는지, 봉수가 왜 사라지는지, 그리고 악취를 원천적으로 막으려면 무엇을 해야 하는지를 정리한 것입니다.</p>
+
+  <h2>트랩의 원리: 물로 막는 문</h2>
+  <p>배수 트랩은 배수관의 일부를 U자나 S자로 구부려 그 안에 물을 가두는 장치입니다. 이 고인 물을 봉수라고 하며, 봉수가 하수관과 실내 사이의 공기 통로를 차단합니다. 세면대 아래의 P트랩을 보면 그 구조가 한눈에 들어옵니다. 물을 쓰면 배수가 트랩을 통과해 흘러가지만, 사용이 끝나면 굽은 부분에 일정량의 물이 남아 다음 사용 때까지 문을 닫고 있는 셈입니다. 봉수의 깊이는 보통 50밀리미터에서 100밀리미터 사이이며, 이 깊이가 충분해야 배수관 안의 압력 변화에도 봉수가 쉽게 깨지지 않습니다.</p>
+  <p>트랩이 없다면 하수관의 공기가 그대로 실내로 들어옵니다. 하수관 안에는 분해 과정에서 생기는 황화수소와 암모니아, 메탄 같은 가스가 차 있고, 이 가스들은 냄새가 고약할 뿐 아니라 고농도에서는 건강에도 해롭습니다. 또한 하수관을 통해 바퀴벌레 같은 해충이 실내로 들어오는 통로도 됩니다. 그래서 건축설비기준에서는 모든 위생기구에 트랩 설치를 의무화하고 있습니다. 트랩은 단순한 부품이 아니라 위생 설비의 핵심이며, 시공할 때 트랩을 빼먹거나 봉수가 유지되지 않는 구조로 만드는 것은 심각한 하자입니다.</p>
+
+  <h2>트랩의 종류와 용도</h2>
+  <p>가장 흔한 트랩은 P트랩과 S트랩입니다. P트랩은 배수관이 수평으로 빠져나가는 구조에 쓰이며, 세면대와 싱크대, 세탁기 배수에 표준적으로 사용됩니다. S트랩은 배수관이 아래쪽으로 빠져나가는 구조에 쓰였지만, 자기 사이펀 현상으로 봉수가 쉽게 깨지는 단점이 있어 최근에는 사용이 줄고 있습니다. 바닥 배수구에는 벨트랩이나 드럼트랩 형태가 쓰이는데, 바닥에 고인 물을 빠르게 빼면서도 봉수를 유지해야 하기 때문에 구조가 조금 다릅니다. 욕실 바닥 배수구처럼 평소 물 사용이 적은 곳은 봉수가 증발하기 쉬우므로, 증발 방지 기능이 있는 트랩이나 자동 급수 장치를 함께 검토하는 것이 좋습니다.</p>
+  <p>트랩을 고를 때는 기구의 배수량과 배관 구조를 함께 봐야 합니다. 배수량이 큰 기구에 작은 트랩을 달면 배수가 느려지고, 반대로 큰 트랩을 달면 봉수량이 많아져 자기 사이펀 위험이 커집니다. 또한 트랩은 청소가 가능해야 합니다. 머리카락과 이물질이 트랩에 쌓이면 배수가 막히고 냄새가 나기 시작하므로, 분해가 쉬운 구조나 청소구를 갖춘 제품을 선택하는 것이 유지관리 측면에서 유리합니다. 스테인리스나 황동 같은 내식성 재질을 쓰면 수명이 길고, 플라스틱 트랩은 저렴하지만 고온 배수에는 사용 온도 한계를 확인해야 합니다.</p>
+  <table>
+    <tr><th>트랩 종류</th><th>주요 용도</th><th>봉수 깊이</th><th>특징</th></tr>
+    <tr><td>P트랩</td><td>세면대, 싱크대, 세탁기</td><td>50–100 mm</td><td>표준형, 자기 사이펀에 비교적 강함</td></tr>
+    <tr><td>S트랩</td><td>바닥 직결 배수</td><td>50–75 mm</td><td>봉수 파괴에 취약, 사용 감소 추세</td></tr>
+    <tr><td>바닥 배수 트랩</td><td>욕실, 발코니 바닥</td><td>50 mm 이상</td><td>증발 방지 기능 필요</td></tr>
+    <tr><td>드럼트랩</td><td>욕조, 대형 배수</td><td>75–100 mm</td><td>대용량, 청소구 필수</td></tr>
+    <tr><td>세탁기 전용 트랩</td><td>세탁기 배수</td><td>50–75 mm</td><td>역류 방지, 배수 호스 고정</td></tr>
+  </table>
+  <p>트랩의 봉수 깊이는 깊을수록 좋다고 생각하기 쉽지만, 너무 깊으면 배수 저항이 커지고 자기 사이펀 현상이 심해질 수 있습니다. 기준에서 정한 50밀리미터에서 100밀리미터 범위를 지키는 것이 가장 안전합니다. 또한 트랩 설치 시 수평을 정확히 맞추는 것도 중요합니다. 트랩이 기울어지면 한쪽 봉수 깊이가 얕아져 압력 변화에 쉽게 깨집니다. 시공 후에는 물을 채우고 수위를 확인해 봉수가 정상적으로 형성되는지 눈으로 점검해야 합니다.</p>
+
+  <h2>봉수 파괴의 네 가지 원인</h2>
+  <p>봉수가 사라지는 원인은 크게 네 가지입니다. 첫째는 자기 사이펀 현상입니다. 기구에서 많은 양의 물이 한꺼번에 배수되면, 트랩을 지나는 물의 흐름이 뒤쪽의 봉수까지 끌어당겨 함께 흘려보냅니다. 변기나 욕조처럼 배수량이 큰 기구에서 흔히 발생하며, 트랩 뒤 배관의 구배가 너무 급하거나 배관 길이가 길면 더 심해집니다. 둘째는 유도 사이펀 현상입니다. 같은 배수 입상관에 연결된 다른 층의 기구에서 대량의 배수가 일어나면, 입상관 안의 압력이 떨어지면서 아래층 트랩의 봉수를 빨아들입니다. 고층 건물에서 저층 화장실 냄새 민원이 생기는 대표적인 원인입니다.</p>
+  <p>셋째는 증발입니다. 오랫동안 사용하지 않은 화장실이나 별장, 공실의 바닥 배수구에서는 봉수가 서서히 증발해 사라집니다. 여름철에는 수주일 만에 봉수가 마를 수 있습니다. 넷째는 모세관 현상과 역류입니다. 트랩 안에 머리카락이나 천 조각이 걸쳐 있으면 물이 그 섬유를 따라 조금씩 빠져나가 봉수가 줄어듭니다. 또한 배수관 막힘이나 폭우로 하수가 역류하면 봉수가 밀려 올라가거나 깨질 수 있습니다. 봉수 파괴는 한 가지 원인만으로 일어나는 경우보다 여러 원인이 겹치는 경우가 많으므로, 냄새 민원이 생기면 원인별로 하나씩 점검해야 합니다.</p>
+
+  <h2>통기 배관: 보이지 않는 해결사</h2>
+  <p>봉수 파괴를 막는 핵심 장치는 통기 배관입니다. 통기 배관은 배수관의 압력을 대기압과 같게 유지해 주는 공기 통로로, 배수 입상관의 상단을 지붕 위로 연장한 것입니다. 배수가 흐를 때 배관 안의 압력이 떨어지면 통기 배관을 통해 공기가 들어와 압력을 보충하고, 압력이 오르면 공기가 빠져나가 압력을 낮춥니다. 통기 배관이 없거나 막히면 배수할 때마다 배관 안의 압력이 크게 출렁이며 트랩의 봉수를 빨아들이거나 밀어 올립니다. 그래서 통기 배관은 배수 설비에서 급수관의 공기 빼기 밸브와 같은 역할을 한다고 볼 수 있습니다.</p>
+  <p>통기 배관 시공에서 자주 생기는 실수는 세 가지입니다. 첫째, 통기 배관의 관경을 너무 작게 잡는 것입니다. 통기 배관이 가늘면 공기 이동량이 부족해 압력 조절이 안 됩니다. 둘째, 통기 배관에 역구배를 주는 것입니다. 통기 배관 안에 응축수가 고이면 공기 통로가 막히므로, 반드시 배수 쪽으로 구배를 주어 물이 흘러내리도록 해야 합니다. 셋째, 통기 배관의 지붕 돌출 높이가 부족하거나, 창문이나 환기구 가까이에 두는 것입니다. 지붕 위로 충분히 높게 내지 않으면 악취가 건물 안으로 다시 들어오고, 눈이나 낙엽으로 막힐 위험도 커집니다. 통기 배관의 끝에는 방충망을 달되, 망이 너무 촘촘하면 결빙이나 막힘의 원인이 되므로 적절한 규격을 써야 합니다.</p>
+
+  <h2>악취 민원 해결 절차</h2>
+  <ol>
+    <li><strong>냄새가 나는 기구를 특정합니다.</strong> 모든 배수구에 코를 대어 냄새가 나는 곳을 찾습니다. 한 곳만 나면 그 트랩 문제이고, 여러 곳이면 통기나 입상관 문제일 가능성이 큽니다.</li>
+    <li><strong>트랩의 봉수를 확인합니다.</strong> 물을 부어 봉수가 차는지, 수위가 유지되는지 확인합니다. 물이 금세 빠져나가면 자기 사이펀이나 배관 누수를 의심합니다.</li>
+    <li><strong>트랩 내부를 청소합니다.</strong> 트랩을 분해해 머리카락과 이물질을 제거합니다. 이물질이 모세관 현상을 일으켜 봉수를 빼앗는 경우가 많습니다.</li>
+    <li><strong>통기 배관을 점검합니다.</strong> 지붕 위 통기 배관 끝이 막혔는지, 새 둥지나 낙엽이 있는지 확인합니다. 옥상에서 물을 부어 배수 쪽으로 흐르는지 점검합니다.</li>
+    <li><strong>다른 층 배수와 연관성을 확인합니다.</strong> 위층에서 물을 내릴 때 아래층 트랩 수위가 흔들리면 유도 사이펀입니다. 통기 배관 증설이나 에어 어드미턴스 밸브 설치를 검토합니다.</li>
+    <li><strong>장기간 미사용 기구는 물을 보충합니다.</strong> 공실이나 별장의 배수구에는 주기적으로 물을 부어 봉수를 유지하고, 증발 방지 트랩으로 교체하는 것을 검토합니다.</li>
+  </ol>
+  <p>악취 원인을 찾지 못한 채 방향제나 소독제로 냄새만 가리는 것은 해결이 아닙니다. 냄새는 하수 가스가 들어오고 있다는 증거이며, 가스 자체가 건강에 해롭기 때문입니다. 특히 바닥 배수구 냄새가 계속되면 트랩이 없는 구조이거나 봉수가 유지되지 않는 구조일 수 있으므로, 배관 구조 자체를 확인해야 합니다. 오래된 건물에서는 바닥 배수구에 트랩이 아예 없는 경우도 있어, 이 경우 트랩을 새로 설치하는 공사가 필요합니다.</p>
+
+  <h2>흔한 하자</h2>
+  <ul>
+    <li><strong>트랩 없는 바닥 배수구:</strong> 오래된 건물에서 흔합니다. 냄새가 계속되면 트랩 설치 공사를 해야 합니다.</li>
+    <li><strong>S트랩 자기 사이펀:</strong> 욕조나 변기 배수 후 봉수가 깨집니다. P트랩으로 교체하거나 통기를 보강합니다.</li>
+    <li><strong>통기 배관 막힘:</strong> 새 둥지, 낙엽, 결빙이 원인입니다. 지붕 위 끝부분을 정기적으로 점검합니다.</li>
+    <li><strong>장기간 미사용으로 인한 증발:</strong> 공실 배수구는 주기적으로 물을 보충하거나 증발 방지 트랩을 사용합니다.</li>
+    <li><strong>트랩 내부 이물질:</strong> 머리카락이 모세관 현상을 일으켜 봉수를 빼앗습니다. 정기적인 분해 청소가 필요합니다.</li>
+    <li><strong>역구배 통기 배관:</strong> 응축수가 고여 공기 통로가 막힙니다. 배수 쪽으로 구배를 다시 잡아야 합니다.</li>
+  </ul>
+
+  
+  <h2>배수관 청소와 유지관리</h2>
+  <p>트랩과 배수관은 설치만으로 끝나는 설비가 아니라 정기적인 청소가 필요한 설비입니다. 세면대와 싱크대 트랩에는 머리카락과 음식물 찌꺼기, 기름이 조금씩 쌓이고, 쌓인 이물질은 배수를 느리게 만들 뿐 아니라 봉수를 빼앗는 모세관 현상의 원인이 됩니다. 바닥 배수구도 마찬가지입니다. 먼지와 머리카락이 트랩에 쌓이면 물이 잘 빠지지 않고 냄새가 나기 시작합니다. 그래서 트랩은 분해가 쉬운 구조로 설치하고, 3개월에서 6개월에 한 번은 분해해 청소하는 것이 좋습니다. 청소할 때는 트랩을 분리해 이물질을 털어내고, 솔로 내부를 닦은 뒤 다시 조립하고 물을 채워 봉수가 정상인지 확인합니다.</p>
+  <p>배수관 내부 청소는 트랩 청소보다 범위가 넓습니다. 주방 배수관은 기름이 굳어 관 내경을 좁히는 경우가 많으므로, 뜨거운 물을 흘려보내 기름을 녹이는 것만으로는 부족하고 주기적으로 전문 세척을 받는 것이 좋습니다. 배수관 세척에는 고압 세척기를 쓰는데, 노즐을 배관 안에 넣어 고압수로 관 벽의 침전물을 씻어내는 방식입니다. 고압 세척은 노후 배관에 부담을 줄 수 있으므로, 배관 상태를 먼저 확인한 뒤 실시해야 합니다. 또한 배수관에 화학 세정제를 자주 붓는 것은 배관 재질을 손상시키고 하수 처리에도 부담을 주므로 권장하지 않습니다. 평소에는 음식물 찌꺼기와 기름을 배수구에 버리지 않는 습관이 가장 좋은 유지관리입니다.</p>
+
+  <h2>자주 묻는 질문</h2>
+  <h3>화장실을 오래 비우면 왜 냄새가 나나요?</h3>
+  <p>트랩의 봉수가 증발했기 때문입니다. 여름철에는 2~3주만 비워도 바닥 배수구의 봉수가 마를 수 있습니다. 장기간 외출 전에는 배수구에 물을 충분히 부어두고, 돌아와서도 물을 부어 봉수를 채우는 것이 좋습니다. 공실이 잦은 곳은 증발 방지 기능이 있는 트랩으로 교체하면 관리가 쉬워집니다.</p>
+  <h3>위층에서 물을 내릴 때 아래층에서 꿀렁 소리가 나요.</h3>
+  <p>유도 사이펀 현상입니다. 입상관 안의 압력 변화가 아래층 트랩의 봉수를 흔들고 있는 것입니다. 통기 배관이 부족하거나 막혔을 가능성이 크므로 통기 배관을 먼저 점검하세요. 통기 보강이 어려우면 각 층 트랩 앞에 에어 어드미턴스 밸브를 설치하는 방법도 있습니다.</p>
+  <h3>배수구에 물을 부어도 냄새가 계속 나요.</h3>
+  <p>트랩 자체가 없거나, 트랩이 깨졌거나, 배관에 균열이 있을 수 있습니다. 트랩을 분해해 상태를 확인하고, 배수관 연결부에 틈이 없는지 점검하세요. 바닥 배수구라면 트랩 유무부터 확인해야 합니다. 그래도 원인을 못 찾으면 배수관 내시경 검사를 의뢰하는 것이 좋습니다.</p>
+
+  <div class="safety"><strong>안전 주의:</strong> 하수관 가스에는 황화수소와 메탄이 포함될 수 있습니다. 냄새가 심한 배수구를 맨손으로 만지거나 얼굴을 가까이 대지 말고, 작업 전에는 충분히 환기하세요. 정화조나 맨홀 내부는 산소 부족과 유독 가스 위험이 있으므로 절대 혼자 들어가지 마세요.</div>
+
+  <div class="related">
+    <h3>관련 계산기</h3>
+    <ul>
+      <li><a href="../index.html#calc-pipe-drain">배수관경 계산기</a> — 기구배수부하단위(FU)와 구배에 맞는 배수관경</li>
+      <li><a href="../index.html#calc-pressure">수압·수두 계산기</a> — 배수 시험과 세척에 필요한 수압 확인</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>배관설비 Hub</h4>
+        <p>무료 배관설비 계산기 — 급수관경, 배수관경, 수압·수두, 펌프 양정·동력, 온수기 용량. KS 기준 · 380V / 220V · 60Hz.</p>
+        <p style="margin-top:8px">plumbinghub.github.io/</p>
+      </div>
+      <div>
+        <h4>계산기</h4>
+        <ul>
+          <li><a href="../index.html#calc-pipe-supply">급수관경 계산기</a></li>
+          <li><a href="../index.html#calc-pipe-drain">배수관경 계산기</a></li>
+          <li><a href="../index.html#calc-pressure">수압·수두 계산기</a></li>
+          <li><a href="../index.html#calc-pump">펌프 양정·동력 계산기</a></li>
+          <li><a href="../index.html#calc-heater">온수기 용량 계산기</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>가이드</h4>
+        <ul>
+          <li><a href="geupsu-baegwan-sigong.html">급수배관 시공 기초</a></li>
+          <li><a href="baesu-teuraep.html">배수 트랩과 악취 방지</a></li>
+          <li><a href="nusu-tamji.html">누수 탐지 방법</a></li>
+          <li><a href="dongpa-bangji.html">동파 방지와 겨울철 관리</a></li>
+          <li><a href="peompeu-seolchi.html">펌프 설치와 양정 계산</a></li>
+          <li><a href="sujil-wisaeng.html">수질과 위생 관리</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 배관설비 Hub · 모든 계산은 브라우저 안에서 이루어집니다 · 결과는 추정치입니다. KS 규격과 제조사 자료, 지역 조례를 확인하세요.</div>
+  </div>
+</footer>
+
+</body>
+</html>

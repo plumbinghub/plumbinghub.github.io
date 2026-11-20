@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>급수배관 시공 기초 — 배관설비 Hub</title>
+<meta name="description" content="급수배관 시공의 기본: 관종 선택, 접합 방법, 고정 간격, 수압 시험 절차와 흔한 하자를 현장 기준으로 정리했습니다.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+:root{--navy:#0f172a;--navy2:#1e293b;--amber:#f59e0b;--amber-dark:#d97706;--amber-bg:#fef3c7;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--green:#15803d;--green-bg:#dcfce7;--red:#b91c1c;--red-bg:#fee2e2;--radius:14px;--shadow:0 1px 3px rgba(15,23,42,.08),0 4px 14px rgba(15,23,42,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+a{color:var(--amber-dark)}
+header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.header-in{display:flex;align-items:center;gap:14px;padding:13px 16px;max-width:1080px;margin:0 auto;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;flex:1;min-width:200px}
+.brand .mark{width:38px;height:38px;border-radius:9px;background:var(--amber);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;flex:none}
+.brand b{font-size:19px;letter-spacing:.2px}
+.brand b span{color:var(--amber)}
+.brand small{display:block;font-size:11.5px;color:#94a3b8;font-weight:400}
+nav.main-nav{display:flex;gap:4px;flex-wrap:wrap}
+nav.main-nav a{color:#cbd5e1;text-decoration:none;font-size:14px;font-weight:600;padding:8px 11px;border-radius:8px}
+nav.main-nav a:hover{background:var(--navy2);color:#fff}
+.article{padding:26px 0 12px}
+.back{margin-bottom:10px}
+.back a{font-weight:700;text-decoration:none}
+.back a:hover{text-decoration:underline}
+.crumb{font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.article h1{font-size:clamp(26px,4.5vw,34px);line-height:1.25;margin-bottom:10px}
+.lede{font-size:17px;color:#334155;margin-bottom:22px}
+.article h2{font-size:21px;margin:28px 0 8px;padding-top:6px;border-top:2px solid var(--amber);display:inline-block}
+.article h3{font-size:17px;margin:18px 0 6px}
+.article p{font-size:15.5px;color:#1e293b;margin-bottom:12px}
+.article ul,.article ol{margin:0 0 14px 22px;font-size:15.5px;color:#1e293b}
+.article li{margin-bottom:6px}
+.article table{border-collapse:collapse;width:100%;font-size:14px;margin:12px 0 16px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.article th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px}
+.article td{padding:9px 12px;border-bottom:1px solid var(--border)}
+.article tr:nth-child(even) td{background:#f8fafc}
+.formula{font-size:13.5px;color:var(--muted);background:#fff;border:1px dashed var(--border);border-radius:8px;padding:10px 12px;margin:12px 0}
+.formula code{color:var(--navy);font-weight:600}
+.safety{background:var(--red-bg);border-left:4px solid var(--red);border-radius:10px;padding:14px 16px;margin:22px 0;font-size:14.5px;color:#7f1d1d}
+.related{background:var(--amber-bg);border:1px solid #fde68a;border-radius:12px;padding:16px 18px;margin:22px 0}
+.related h3{font-size:15px;margin:0 0 8px}
+.related ul{margin:0 0 0 20px}
+.related li{margin-bottom:4px}
+footer{background:var(--navy);color:#94a3b8;margin-top:44px;padding:30px 0 26px}
+footer .cols{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:640px){footer .cols{grid-template-columns:2fr 1fr 1fr}}
+footer h4{color:#fff;font-size:15px;margin-bottom:10px}
+footer p,footer a{font-size:13.5px;color:#94a3b8;text-decoration:none}
+footer a:hover{color:#fff}
+footer ul{list-style:none}
+footer li{margin-bottom:6px}
+.copy{border-top:1px solid #1e293b;margin-top:22px;padding-top:16px;font-size:12.5px;text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="brand" href="../index.html"><span class="mark">배</span><span><b>배관설비 <span>Hub</span></b><small>plumbinghub.github.io/</small></span></a>
+    <nav class="main-nav">
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#reference">기준표</a>
+      <a href="../index.html#guides">가이드</a>
+      <a href="../index.html#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap article">
+  <p class="back"><a href="../index.html">&larr; 배관설비 Hub로 돌아가기</a></p>
+  <p class="crumb">가이드 / 급수 시공</p>
+  <h1>급수배관 시공 기초</h1>
+  <p class="lede">급수배관은 건물에서 가장 오래, 가장 조용히 일해야 하는 설비입니다. 벽 속에 묻힌 배관 하나가 터지면 천장 누수와 곰팡이, 이웃과의 분쟁까지 이어지기 때문에 시공 단계에서 기준을 지키는 것이 무엇보다 중요합니다. 이 글은 관종 선택부터 접합, 고정, 수압 시험까지 급수배관 시공의 기본을 현장 기준으로 정리한 것입니다.</p>
+
+  <h2>급수배관의 역할과 설계 원칙</h2>
+  <p>급수배관의 임무는 간단합니다. 수도 본관이나 저수조에서 받은 물을 각 위생기구까지 충분한 수압과 수량으로, 깨끗한 상태로 전달하는 것입니다. 그런데 이 단순한 임무를 수십 년 동안 유지하려면 설계 단계에서 세 가지를 먼저 정해야 합니다. 첫째는 동시 사용 유량입니다. 모든 수도전을 동시에 틀 일은 거의 없으므로, 기구 수와 사용 패턴에 따라 동시 사용량을 합리적으로 산정해야 관경이 과대해지거나 과소해지지 않습니다. 둘째는 수압입니다. 최상층과 최하층의 수압 차이가 크기 때문에, 고층 건물에서는 중간층 감압밸브와 가압펌프의 조합이 필요합니다. 셋째는 수질 유지입니다. 정체되는 구간이 생기면 수질이 나빠지므로, 배관 경로는 짧고 단순하게, 말단에는 순환이 가능하도록 구성하는 것이 원칙입니다.</p>
+  <p>설계 도면이 나오면 시공 전에 반드시 현장을 확인합니다. 도면상의 배관 경로에 구조 보나 전기 배관이 겹치는지, 천장고가 충분한지, 점검구를 둘 자리가 있는지를 확인하지 않고 그대로 시공하면 나중에 되돌리는 비용이 훨씬 큽니다. 특히 리모델링 현장에서는 기존 배관의 위치와 상태를 확인하는 것이 필수입니다. 낡은 아연도강관 뒤에 새 배관을 연결했다가 이종 금속 접촉 부식이나 녹물 민원이 생기는 사례가 적지 않기 때문입니다.</p>
+
+  <h2>관종 선택: 무엇을, 어디에 쓸 것인가</h2>
+  <p>한국의 급수배관 현장에서 가장 많이 쓰이는 관종은 스테인리스강관, 동관, PB관, PE관, 그리고 아연도강관입니다. 각각의 특성이 뚜렷하기 때문에 용도와 위치에 맞게 골라야 합니다. 스테인리스강관은 내식성이 뛰어나고 수명이 길어 급수 주관과 옥내 급수관에 널리 쓰입니다. 프레스 접합 방식이 보급되면서 시공 속도도 빨라졌고, 녹물 걱정이 없어 음용수 배관에 적합합니다. 다만 단가가 높고, 절단과 접합에 전용 공구가 필요하다는 점은 감안해야 합니다.</p>
+  <p>동관은 열전도율이 높고 살균성이 있어 온수 배관에 많이 쓰였지만, 최근에는 단가 상승과 도난 문제로 사용이 줄고 있습니다. PB관과 PE관은 유연해서 시공이 쉽고 동파에도 비교적 강하지만, 자외선에 약하고 고온에 한계가 있어 온수 사용 온도와 노출 여부를 확인해야 합니다. 아연도강관은 예전 주택의 표준이었으나, 시간이 지나면 내부에 녹이 슬어 유량이 줄고 수질이 나빠지기 때문에, 신규 시공에서는 거의 쓰이지 않고 기존 배관 교체 대상으로 취급됩니다.</p>
+  <table>
+    <tr><th>관종</th><th>주요 용도</th><th>대표 접합 방식</th><th>장점</th><th>주의점</th></tr>
+    <tr><td>스테인리스강관 (KS D 3507)</td><td>급수 주관, 옥내 급수</td><td>프레스, 용접</td><td>내식성 우수, 수명 길다</td><td>단가 높음, 전용 공구 필요</td></tr>
+    <tr><td>동관 (KS D 5301)</td><td>온수 배관</td><td>납땜, 압착</td><td>내열성, 살균성</td><td>단가 높음, 도난 위험</td></tr>
+    <tr><td>PB관</td><td>옥내 급수·온수</td><td>열융착, 압착</td><td>유연함, 동파에 강함</td><td>자외선 취약, 고온 한계</td></tr>
+    <tr><td>PE관</td><td>매설 급수관</td><td>열융착, 기계식</td><td>내식성, 시공 용이</td><td>노출 금지, 하중 주의</td></tr>
+    <tr><td>아연도강관</td><td>기존 설비 (교체 대상)</td><td>나사 접합</td><td>강도 높음</td><td>내부 부식, 녹물 발생</td></tr>
+  </table>
+  <p>관종을 고를 때는 단가만 보지 말고 수명 주기 전체를 봐야 합니다. 값싼 관을 썼다가 10년 뒤 녹물과 누수로 전면 교체하는 비용이 처음부터 좋은 관을 쓴 비용보다 훨씬 큽니다. 또한 같은 건물 안에서는 관종을 되도록 통일하는 것이 좋습니다. 관종이 섞이면 이종 금속 접촉 부식의 위험이 커지고, 보수할 때 자재 관리도 복잡해지기 때문입니다. 부득이하게 다른 금속을 연결해야 할 때는 절연 유니온이나 절연 플랜지를 넣어 전기적 접촉을 차단해야 합니다.</p>
+
+  <h2>접합 방법의 핵심</h2>
+  <p>급수배관 누수의 대부분은 관 자체가 아니라 접합부에서 발생합니다. 접합 방식마다 지켜야 할 절차가 다르므로, 시공자는 각 방식의 요령을 정확히 알고 있어야 합니다. 나사 접합은 가장 오래된 방식으로, 나사산에 실링 테이프나 실란트를 감아 조입니다. 이때 테이프를 감는 방향이 중요합니다. 나사를 조이는 방향과 같은 방향으로 감아야 테이프가 풀리지 않고, 너무 두껍게 감으면 나사산이 손상되거나 접합부가 벌어질 수 있습니다. 조임 토크도 적당해야 합니다. 무리하게 조이면 소켓이 깨지거나 나사산이 뭉개져 오히려 누수가 생깁니다.</p>
+  <p>프레스 접합은 스테인리스강관의 주류 방식으로, 전용 프레스 공구로 피팅을 압착해 밀봉합니다. 빠르고 균일한 시공이 가능하지만, 압착이 덜 되었는지 육안으로는 확인하기 어려우므로 공구 압력과 피팅 삽입 깊이를 매번 확인해야 합니다. 열융착은 PB관과 PE관에 쓰이는 방식으로, 관과 피팅을 일정 온도로 가열해 녹여 붙입니다. 가열 시간이 짧으면 접합이 약하고, 길면 관이 막히거나 변형되므로 제조사에서 정한 가열 시간과 삽입 깊이를 지켜야 합니다. 용접 접합은 강관과 스테인리스강관의 대구경 배관에 쓰이며, 용접사의 자격과 용접 후 내부 스케일 제거가 품질을 좌우합니다.</p>
+  <p>어떤 접합이든 공통 원칙은 청결입니다. 접합면에 먼지나 기름, 물방울이 남아 있으면 접합 강도가 떨어집니다. 특히 열융착과 접착 접합은 접합면을 깨끗이 닦고 건조한 상태에서 작업해야 합니다. 또한 접합이 끝난 뒤에는 바로 수압을 걸지 말고, 접합제가 굳거나 식을 시간을 충분히 줘야 합니다. 조급하게 시험하면 아직 굳지 않은 접합부가 벌어져 하자의 원인이 됩니다.</p>
+
+  <h2>고정 간격과 열팽창 대책</h2>
+  <p>배관은 물의 무게와 수격, 온도 변화에 따른 팽창과 수축을 끊임없이 받습니다. 고정이 부실하면 배관이 처지거나 흔들리면서 접합부에 하중이 걸리고, 결국 누수로 이어집니다. 고정 간격은 관경과 관종에 따라 정해져 있으며, 일반적으로 수평 배관은 관경이 클수록 간격을 넓게 잡습니다. 작은 관경일수록 처짐이 심하므로 간격을 좁혀야 한다는 점을 기억하세요. 수직 배관은 층마다 한 곳 이상 고정하는 것이 원칙이며, 특히 입상관 하부에는 하중을 받는 지지대를 별도로 설치해야 합니다.</p>
+  <p>온수 배관에서는 열팽창 대책이 필수입니다. 금속관은 온도가 40도만 올라도 10미터당 수 밀리미터가 늘어납니다. 팽창을 흡수하지 못하면 배관이 휘거나 접합부가 빠집니다. 긴 직선 구간에는 신축 이음이나 루프를 넣어 팽창을 흡수하고, 고정점은 팽창 방향을 고려해 배치해야 합니다. 고정점을 양쪽에 모두 단단히 잡으면 팽창이 갈 곳을 잃고 배관이 좌굴되므로, 한쪽은 고정하고 다른 쪽은 미끄럼 지지로 두는 것이 기본입니다. PB관처럼 유연한 관도 열팽창이 크므로, 배관 경로에 여유를 두고 고정 간격을 지침대로 잡아야 합니다.</p>
+
+  <h2>수압 시험: 시공 품질을 증명하는 절차</h2>
+  <p>급수배관 시공이 끝나면 반드시 수압 시험을 해야 합니다. 시험을 생략하거나 형식적으로 하는 현장이 아직도 있지만, 벽을 마감한 뒤에 누수가 발견되면 수리 비용이 수십 배로 불어납니다. 수압 시험은 매립이나 마감 전에, 배관이 노출된 상태에서 실시하는 것이 원칙입니다. 시험 압력은 통상 사용 압력의 1.5배, 최소 1.0 MPa 정도로 가압하고, 일정 시간 유지하면서 압력 강하와 누수 여부를 확인합니다.</p>
+  <ol>
+    <li><strong>배관 내 공기를 빼고 물을 채웁니다.</strong> 최고점의 공기 빼기 밸브를 열어 공기를 완전히 배출한 뒤 물을 채웁니다. 공기가 남아 있으면 압력이 불안정해 시험 결과를 믿을 수 없습니다.</li>
+    <li><strong>시험 압력까지 서서히 가압합니다.</strong> 펌프로 천천히 압력을 올리며, 급격한 가압으로 인한 수격을 피합니다. 목표 압력에 도달하면 펌프를 멈춥니다.</li>
+    <li><strong>압력을 유지하며 전 구간을 육안으로 점검합니다.</strong> 모든 접합부와 밸브, 분기점을 눈으로 확인합니다. 작은 물방울이라도 보이면 불합격입니다.</li>
+    <li><strong>정해진 시간 동안 압력 강하를 기록합니다.</strong> 보통 30분에서 1시간 유지하며, 허용 범위 이상의 압력 강하가 있으면 누수 지점을 찾아 보수합니다.</li>
+    <li><strong>보수한 구간은 다시 시험합니다.</strong> 보수 부위만 부분 시험하는 것으로는 부족하며, 해당 계통 전체를 다시 시험하는 것이 안전합니다.</li>
+    <li><strong>시험 결과를 기록으로 남깁니다.</strong> 시험 일시, 압력, 유지 시간, 점검자, 결과를 기록하고 사진과 함께 보관합니다. 나중에 분쟁이 생기면 이 기록이 유일한 증거가 됩니다.</li>
+  </ol>
+  <p>시험에 통과했더라도 바로 마감하지 말고, 일정 시간 경과 후 한 번 더 육안으로 확인하는 습관을 들이는 것이 좋습니다. 미세한 누수는 시험 직후에는 보이지 않다가 시간이 지나면서 드러나는 경우가 있기 때문입니다. 또한 시험 후 배관 내 물을 그대로 두면 겨울철 동파나 정체수 문제가 생길 수 있으니, 사용 전까지는 배수하거나 순환시켜 관리해야 합니다.</p>
+
+  <h2>흔한 하자와 예방법</h2>
+  <ul>
+    <li><strong>접합부 누수:</strong> 나사 테이프 감는 방향 오류, 프레스 압착 불량, 열융착 가열 시간 미준수가 원인입니다. 접합 후 전수 육안 검사와 수압 시험으로 잡아냅니다.</li>
+    <li><strong>수압 부족:</strong> 관경 과소 설계, 노후관 내부 스케일, 감압밸브 오설정이 원인입니다. 설계 단계에서 동시 사용 유량과 마찰손실을 계산하고, 감압밸브 설정값을 확인합니다.</li>
+    <li><strong>수격음과 진동:</strong> 유속 과대, 고정 간격 과대, 워터 해머 방지 장치 미설치가 원인입니다. 유속을 2.0 m/s 이하로 유지하고, 급속 개폐 밸브 근처에는 수격 방지기를 설치합니다.</li>
+    <li><strong>녹물과 수질 악화:</strong> 아연도강관 노후화, 정체 구간, 이종 금속 접촉 부식이 원인입니다. 관종 교체와 정체 구간 제거, 절연 유니온 설치로 예방합니다.</li>
+    <li><strong>동파:</strong> 노출 배관 보온 미비, 외벽 매립 배관의 단열 부족이 원인입니다. 보온재 시공과 동파 방지 가이드의 절차를 따릅니다.</li>
+    <li><strong>결로:</strong> 냉수 배관의 단열 미비로 표면에 이슬이 맺혀 천장을 적십니다. 냉수관에도 반드시 보온재를 시공합니다.</li>
+  </ul>
+
+  
+  <h2>급수관 보온과 결로 대책</h2>
+  <p>급수배관 시공에서 자주 빠뜨리는 항목이 보온입니다. 냉수관에는 보온이 필요 없다고 생각하기 쉽지만, 여름철 습한 공기가 차가운 냉수관 표면에 닿으면 결로가 생겨 물방울이 떨어지고 천장과 벽을 적십니다. 결로수는 누수처럼 보이기 때문에 원인을 찾느라 시간을 허비하는 경우도 많습니다. 그래서 냉수관에도 반드시 보온재를 시공해야 하며, 특히 천장 속이나 벽 속에 매립되는 구간은 마감 전에 보온 상태를 확인해야 합니다. 보온재 이음부는 테이프로 단단히 마감해 습한 공기가 들어가지 않도록 하고, 밸브와 분기 부위도 빠짐없이 감싸야 합니다.</p>
+  <p>온수관은 보온이 열 손실을 줄이는 역할까지 합니다. 보온이 안 된 온수 배관은 물을 데우는 데 드는 에너지가 늘어나고, 수도전을 틀었을 때 뜨거운 물이 나오기까지 시간이 오래 걸립니다. 순환 배관이 있는 건물에서는 순환 펌프가 계속 돌면서 열을 잃기 때문에 보온이 더 중요합니다. 보온재 두께는 관경과 설치 환경에 따라 정해지며, 외기에 노출되는 구간은 실내보다 두껍게 시공하는 것이 좋습니다. 보온재가 젖으면 단열 성능이 크게 떨어지므로, 외부 배관은 방수 마감까지 함께 해야 합니다. 시공 후에는 보온재가 처지거나 벌어진 곳이 없는지 전 구간을 육안으로 확인하고, 사진으로 기록해 두면 나중에 하자 여부를 판단하는 데 도움이 됩니다.</p>
+
+  <h2>자주 묻는 질문</h2>
+  <h3>급수관경은 어떻게 정하나요?</h3>
+  <p>동시 사용 유량을 먼저 산정하고, 적정 유속 1.0–2.0 m/s 범위에서 필요 내경을 구한 뒤, 그 이상의 KS 호칭경을 선택합니다. 이 사이트의 급수관경 계산기에 유량과 배관 길이를 입력하면 필요 내경과 마찰손실, 추천 관경을 바로 확인할 수 있습니다. 설계 단계에서는 장래 증설 여유도 함께 고려하는 것이 좋습니다.</p>
+  <h3>기존 아연도강관을 그대로 써도 되나요?</h3>
+  <p>내부 상태를 확인한 뒤 판단해야 합니다. 겉은 멀쩡해 보여도 내부는 녹으로 좁아진 경우가 많습니다. 절단면을 확인하거나 내시경으로 내부를 보면 판단이 쉽습니다. 녹이 심하거나 유량이 부족하면 부분 보수가 아니라 전면 교체를 검토하는 것이 장기적으로 저렴합니다.</p>
+  <h3>수압 시험은 꼭 해야 하나요?</h3>
+  <p>반드시 해야 합니다. 수압 시험은 시공 품질을 증명하는 유일한 객관적 절차이며, 마감 전에 누수를 잡을 수 있는 마지막 기회입니다. 시험을 생략하고 마감한 뒤 누수가 발견되면 천장과 벽을 뜯어야 하므로, 시험에 드는 시간과 비용은 비교가 되지 않습니다.</p>
+
+  <div class="safety"><strong>안전 주의:</strong> 수압 시험 중에는 시험 구간에 사람이 머물지 않도록 하고, 고압 펌프와 게이지 상태를 수시로 확인하세요. 노후 배관에 과도한 압력을 가하면 파열될 수 있습니다. 가압 전에는 반드시 공기 빼기를 완료하고, 시험 중 이상 소음이나 진동이 느껴지면 즉시 감압하세요.</div>
+
+  <div class="related">
+    <h3>관련 계산기</h3>
+    <ul>
+      <li><a href="../index.html#calc-pipe-supply">급수관경 계산기</a> — 필요 내경과 마찰손실, 추천 KS 호칭경</li>
+      <li><a href="../index.html#calc-pressure">수압·수두 계산기</a> — 가용 수압과 최저 수압 비교</li>
+      <li><a href="../index.html#calc-pump">펌프 양정·동력 계산기</a> — 가압펌프 선정</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>배관설비 Hub</h4>
+        <p>무료 배관설비 계산기 — 급수관경, 배수관경, 수압·수두, 펌프 양정·동력, 온수기 용량. KS 기준 · 380V / 220V · 60Hz.</p>
+        <p style="margin-top:8px">plumbinghub.github.io/</p>
+      </div>
+      <div>
+        <h4>계산기</h4>
+        <ul>
+          <li><a href="../index.html#calc-pipe-supply">급수관경 계산기</a></li>
+          <li><a href="../index.html#calc-pipe-drain">배수관경 계산기</a></li>
+          <li><a href="../index.html#calc-pressure">수압·수두 계산기</a></li>
+          <li><a href="../index.html#calc-pump">펌프 양정·동력 계산기</a></li>
+          <li><a href="../index.html#calc-heater">온수기 용량 계산기</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>가이드</h4>
+        <ul>
+          <li><a href="geupsu-baegwan-sigong.html">급수배관 시공 기초</a></li>
+          <li><a href="baesu-teuraep.html">배수 트랩과 악취 방지</a></li>
+          <li><a href="nusu-tamji.html">누수 탐지 방법</a></li>
+          <li><a href="dongpa-bangji.html">동파 방지와 겨울철 관리</a></li>
+          <li><a href="peompeu-seolchi.html">펌프 설치와 양정 계산</a></li>
+          <li><a href="sujil-wisaeng.html">수질과 위생 관리</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 배관설비 Hub · 모든 계산은 브라우저 안에서 이루어집니다 · 결과는 추정치입니다. KS 규격과 제조사 자료, 지역 조례를 확인하세요.</div>
+  </div>
+</footer>
+
+</body>
+</html>

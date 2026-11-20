@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>누수 탐지 방법 — 배관설비 Hub</title>
+<meta name="description" content="보이지 않는 누수를 찾는 실무 방법: 수량계 확인, 구간 분리, 수압 시험, 청음 탐지, 열화상 카메라까지 단계별로 정리했습니다.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+:root{--navy:#0f172a;--navy2:#1e293b;--amber:#f59e0b;--amber-dark:#d97706;--amber-bg:#fef3c7;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--green:#15803d;--green-bg:#dcfce7;--red:#b91c1c;--red-bg:#fee2e2;--radius:14px;--shadow:0 1px 3px rgba(15,23,42,.08),0 4px 14px rgba(15,23,42,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+a{color:var(--amber-dark)}
+header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.header-in{display:flex;align-items:center;gap:14px;padding:13px 16px;max-width:1080px;margin:0 auto;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;flex:1;min-width:200px}
+.brand .mark{width:38px;height:38px;border-radius:9px;background:var(--amber);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;flex:none}
+.brand b{font-size:19px;letter-spacing:.2px}
+.brand b span{color:var(--amber)}
+.brand small{display:block;font-size:11.5px;color:#94a3b8;font-weight:400}
+nav.main-nav{display:flex;gap:4px;flex-wrap:wrap}
+nav.main-nav a{color:#cbd5e1;text-decoration:none;font-size:14px;font-weight:600;padding:8px 11px;border-radius:8px}
+nav.main-nav a:hover{background:var(--navy2);color:#fff}
+.article{padding:26px 0 12px}
+.back{margin-bottom:10px}
+.back a{font-weight:700;text-decoration:none}
+.back a:hover{text-decoration:underline}
+.crumb{font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.article h1{font-size:clamp(26px,4.5vw,34px);line-height:1.25;margin-bottom:10px}
+.lede{font-size:17px;color:#334155;margin-bottom:22px}
+.article h2{font-size:21px;margin:28px 0 8px;padding-top:6px;border-top:2px solid var(--amber);display:inline-block}
+.article h3{font-size:17px;margin:18px 0 6px}
+.article p{font-size:15.5px;color:#1e293b;margin-bottom:12px}
+.article ul,.article ol{margin:0 0 14px 22px;font-size:15.5px;color:#1e293b}
+.article li{margin-bottom:6px}
+.article table{border-collapse:collapse;width:100%;font-size:14px;margin:12px 0 16px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.article th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px}
+.article td{padding:9px 12px;border-bottom:1px solid var(--border)}
+.article tr:nth-child(even) td{background:#f8fafc}
+.formula{font-size:13.5px;color:var(--muted);background:#fff;border:1px dashed var(--border);border-radius:8px;padding:10px 12px;margin:12px 0}
+.formula code{color:var(--navy);font-weight:600}
+.safety{background:var(--red-bg);border-left:4px solid var(--red);border-radius:10px;padding:14px 16px;margin:22px 0;font-size:14.5px;color:#7f1d1d}
+.related{background:var(--amber-bg);border:1px solid #fde68a;border-radius:12px;padding:16px 18px;margin:22px 0}
+.related h3{font-size:15px;margin:0 0 8px}
+.related ul{margin:0 0 0 20px}
+.related li{margin-bottom:4px}
+footer{background:var(--navy);color:#94a3b8;margin-top:44px;padding:30px 0 26px}
+footer .cols{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:640px){footer .cols{grid-template-columns:2fr 1fr 1fr}}
+footer h4{color:#fff;font-size:15px;margin-bottom:10px}
+footer p,footer a{font-size:13.5px;color:#94a3b8;text-decoration:none}
+footer a:hover{color:#fff}
+footer ul{list-style:none}
+footer li{margin-bottom:6px}
+.copy{border-top:1px solid #1e293b;margin-top:22px;padding-top:16px;font-size:12.5px;text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="brand" href="../index.html"><span class="mark">배</span><span><b>배관설비 <span>Hub</span></b><small>plumbinghub.github.io/</small></span></a>
+    <nav class="main-nav">
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#reference">기준표</a>
+      <a href="../index.html#guides">가이드</a>
+      <a href="../index.html#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap article">
+  <p class="back"><a href="../index.html">&larr; 배관설비 Hub로 돌아가기</a></p>
+  <p class="crumb">가이드 / 진단 · 점검</p>
+  <h1>누수 탐지 방법</h1>
+  <p class="lede">수도요금이 갑자기 늘었는데 눈에 보이는 물은 없고, 천장에 얼룩이 생겼는데 위층에서는 괜찮다고 합니다. 누수는 대부분 보이지 않는 곳에서 시작되고, 위치를 모른 채 벽을 뜯는 것은 비용과 시간의 낭비입니다. 이 글은 수량계 확인부터 청음 탐지, 열화상까지 누수 위치를 단계적으로 좁혀가는 실무 방법을 정리한 것입니다.</p>
+
+  <h2>누수의 징후를 읽는 법</h2>
+  <p>누수는 대개 작은 신호부터 보냅니다. 수도요금이 평소보다 눈에 띄게 늘었다면 가장 먼저 의심해야 합니다. 사용 패턴이 바뀌지 않았는데 요금이 올랐다면 어딘가에서 물이 새고 있을 가능성이 큽니다. 벽지나 천장에 생긴 얼룩, 곰팡이 냄새, 바닥의 들뜸도 누수의 징후입니다. 특히 얼룩이 점점 커지거나, 비가 오지 않는데도 젖는 부위가 있다면 배관 누수를 의심해야 합니다. 수도 계량기함 주변이 항상 젖어 있거나, 마당 한 곳만 유독 풀이 잘 자라는 경우도 지하 매설관 누수의 신호일 수 있습니다.</p>
+  <p>징후를 무시하고 두면 피해가 커집니다. 작은 누수라도 콘크리트 속에 스며들면 철근 부식을 일으키고, 목재 구조는 썩기 시작합니다. 겨울철에는 새는 물이 얼어 배관을 더 벌리고, 곰팡이는 거주자의 건강까지 해칩니다. 그래서 누수 징후가 보이면 원인을 찾는 것을 미루지 않는 것이 중요합니다. 누수 탐지의 기본 원칙은 간단합니다. 넓은 범위에서 좁은 범위로, 값싼 방법에서 비싼 방법으로 단계적으로 좁혀가는 것입니다. 처음부터 벽을 뜯거나 고가 장비를 부르는 것은 마지막 수단입니다.</p>
+
+  <h2>1단계: 수량계로 누수 여부 확인하기</h2>
+  <p>누수 탐지의 첫 단계는 수량계를 보는 것입니다. 집 안의 모든 수도전을 잠그고, 변기 물탱크와 세탁기, 정수기 등 물을 쓰는 기기를 모두 멈춘 뒤 수량계의 지침을 확인합니다. 지침이 움직이거나, 별 모양의 지침 바늘이 천천히 돌아가고 있다면 어딘가에서 물이 새고 있는 것입니다. 이 검사는 비용이 들지 않고 몇 분이면 끝나지만, 누수 여부를 확실히 가려주는 가장 기본적인 방법입니다. 이때 변기 물탱크의 고무 패킹이 닳아 물이 조금씩 새는 경우도 흔하므로, 변기 물탱크에 식용 색소를 넣어 변기 안으로 색이 스며드는지 확인하는 것도 함께 해두면 좋습니다.</p>
+  <p>수량계 검사는 누수가 있다는 것만 알려줄 뿐, 어디서 새는지는 알려주지 않습니다. 그래서 다음 단계는 급수 누수인지 배수 누수인지를 가르는 것입니다. 모든 수도전을 잠근 상태에서 수량계가 움직이면 급수관 누수입니다. 반대로 수량계는 멈췄는데 물을 쓸 때만 아래층 천장이 젖는다면 배수관 누수일 가능성이 큽니다. 급수 누수는 수압이 걸린 상태에서 계속 새기 때문에 피해가 빠르고, 배수 누수는 물을 쓸 때만 새기 때문에 간헐적으로 나타납니다. 이 구분만 제대로 해도 탐지 범위가 절반으로 줄어듭니다.</p>
+
+  <h2>2단계: 구간을 나누어 범위 좁히기</h2>
+  <p>급수 누수가 확인되면 배관을 구간별로 나누어 어느 구간에서 새는지 찾습니다. 건물에는 보통 층별, 구역별로 차단 밸브가 있으므로, 밸브를 하나씩 잠그면서 수량계가 멈추는지를 확인합니다. 예를 들어 2층 밸브를 잠갔을 때 수량계가 멈춘다면 누수는 2층 구간에 있다는 뜻입니다. 이런 식으로 구간을 절반씩 나누어 가면 누수 구간을 빠르게 좁힐 수 있습니다. 밸브가 없거나 밸브가 고장 난 경우에는 임시로 배관을 막는 방법도 있지만, 이 작업은 설비 기술자에게 맡기는 것이 안전합니다.</p>
+  <p>구간 분리는 배수 누수 탐지에도 같은 원리로 적용됩니다. 물을 쓰는 기구를 하나씩 사용해 보면서 어느 기구를 쓸 때 아래층이 젖는지 확인합니다. 세면대만 쓸 때는 괜찮고 샤워를 할 때만 젖는다면 샤워 배수구나 욕실 바닥 방수층 문제일 가능성이 큽니다. 변기만 쓸 때 젖는다면 변기 배수관 접합부를 의심합니다. 이렇게 기구별로 나누어 확인하면 벽을 뜯지 않고도 원인을 상당히 좁힐 수 있습니다. 이때 아래층 천장의 젖은 부위 위치도 함께 기록해 두면, 위층 배관 경로와 대조해 누수 지점을 추정하는 데 도움이 됩니다.</p>
+
+  <h2>3단계: 수압 시험으로 확정하기</h2>
+  <p>구간이 좁혀지면 수압 시험으로 누수를 확정합니다. 의심 구간을 분리한 뒤 공기를 빼고 물을 채워 시험 압력까지 가압하고, 일정 시간 압력이 유지되는지 확인합니다. 압력이 떨어지면 그 구간에 누수가 있는 것이 확실합니다. 수압 시험은 누수 여부를 확정하는 가장 확실한 방법이지만, 시험 자체가 배관에 부담을 주므로 노후 배관에서는 압력을 과도하게 올리지 않도록 주의해야 합니다. 시험 압력은 사용 압력의 1.5배를 넘지 않는 범위에서 정하고, 가압은 서서히 해야 합니다.</p>
+  <p>수압 시험으로 구간은 확정했지만 정확한 지점은 아직 모를 수 있습니다. 이때는 구간 내의 노출 배관을 육안으로 다시 점검합니다. 접합부와 밸브 주변, 벽을 통과하는 부분에 물방울이나 녹물이 있는지 확인합니다. 노출 배관에서 찾지 못하면 매립 배관 구간이 남는데, 이때부터는 청음 탐지나 열화상 같은 전문 장비의 도움을 받는 것이 효율적입니다. 무작정 벽을 뜯는 것보다 장비 탐지 비용이 훨씬 저렴하기 때문입니다.</p>
+
+  <h2>청음 탐지와 열화상 카메라</h2>
+  <p>청음 탐지는 누수 지점에서 나는 미세한 소리를 듣는 방법입니다. 가압된 배관에서 물이 새면 누수 지점에서 특유의 마찰음과 진동이 발생하는데, 이를 지면이나 벽에 댄 청음기로 듣고 소리가 가장 큰 지점을 찾습니다. 조용한 밤 시간에 탐지하면 정확도가 높아집니다. 청음 탐지는 금속관 누수에 특히 효과적이며, 숙련된 탐지사는 소리의 크기와 음색으로 누수량까지 어림짐작할 수 있습니다. 다만 플라스틱관은 소리 전달이 약하고, 주변 소음이 심한 낮 시간에는 정확도가 떨어진다는 한계가 있습니다.</p>
+  <p>열화상 카메라는 온수 배관 누수 탐지에 강합니다. 새는 온수가 벽이나 바닥을 데우면 그 부위가 주변보다 따뜻하게 나타나므로, 열화상 이미지에서 온도 분포를 보고 누수 지점을 추정할 수 있습니다. 냉수 배관 누수는 반대로 주변보다 차갑게 나타나기도 하지만, 온도 차이가 작아 판단이 어려울 수 있습니다. 열화상은 비파괴 탐지가 가능하고 범위를 한눈에 볼 수 있다는 장점이 있지만, 장비 가격과 해석 경험이 필요하다는 단점이 있습니다. 최근에는 열화상 카메라를 갖춘 탐지 업체가 많아졌고, 비용도 예전보다 낮아졌습니다.</p>
+  <table>
+    <tr><th>탐지 방법</th><th>적합한 경우</th><th>장점</th><th>한계</th></tr>
+    <tr><td>수량계 확인</td><td>누수 여부 판단</td><td>무료, 즉시 가능</td><td>위치는 알 수 없음</td></tr>
+    <tr><td>구간 분리</td><td>층·구역별 누수</td><td>범위를 빠르게 축소</td><td>밸브가 필요함</td></tr>
+    <tr><td>수압 시험</td><td>구간 확정</td><td>확실한 판정</td><td>노후관 부담, 시간 소요</td></tr>
+    <tr><td>청음 탐지</td><td>금속관 매립 누수</td><td>지점 특정 가능</td><td>소음에 약함, 숙련 필요</td></tr>
+    <tr><td>열화상 카메라</td><td>온수관 누수</td><td>비파괴, 범위 확인</td><td>냉수관에 약함, 비용</td></tr>
+    <tr><td>추적 가스</td><td>미세 누수</td><td>정밀한 지점 특정</td><td>전문 업체 필요, 비용 높음</td></tr>
+  </table>
+  <p>추적 가스 탐지는 가장 정밀한 방법 중 하나입니다. 배관 안에 수소와 질소를 섞은 추적 가스를 넣고, 지면 위에서 가스 검출기로 새어 나오는 가스를 찾습니다. 가스는 물보다 훨씬 잘 퍼지므로 미세한 누수도 찾을 수 있고, 콘크리트 속 누수까지 탐지할 수 있습니다. 다만 전문 장비와 기술이 필요해 비용이 높고, 배관을 비우고 가스를 주입하는 준비 작업이 필요합니다. 일반적인 주택 누수에서는 수량계 확인과 구간 분리, 청음 탐지까지로 대부분 해결되며, 추적 가스는 그 방법들로도 찾지 못한 어려운 누수에 사용하는 최종 수단으로 생각하면 됩니다.</p>
+
+  <h2>누수 위치별 대응</h2>
+  <ul>
+    <li><strong>노출 배관 접합부:</strong> 패킹 교체나 재접합으로 해결됩니다. 가장 수리가 쉬운 경우입니다.</li>
+    <li><strong>벽 속 매립 배관:</strong> 탐지로 지점을 확정한 뒤 최소 범위로 벽을 열어 보수합니다. 보수 후에는 수압 시험으로 재확인합니다.</li>
+    <li><strong>바닥 슬래브 속 배관:</strong> 탐지가 어렵고 수리 범위가 큽니다. 경우에 따라 매립 배관을 포기하고 노출 배관으로 우회하는 것이 경제적입니다.</li>
+    <li><strong>지하 매설관:</strong> 청음 탐지나 추적 가스로 지점을 찾습니다. 굴착 전에 지하 매설물 도면을 확인해야 합니다.</li>
+    <li><strong>변기·세면대 접합부:</strong> 고무 패킹 노후화가 흔한 원인입니다. 패킹 교체로 대부분 해결됩니다.</li>
+    <li><strong>옥상 방수층과 배수구:</strong> 배관 누수가 아니라 방수 문제일 수 있습니다. 배수구 주변 방수층 상태를 함께 점검합니다.</li>
+  </ul>
+
+  
+  <h2>누수 예방을 위한 정기 점검</h2>
+  <p>누수는 찾기도 어렵고 수리도 비싸지만, 예방은 비교적 쉽습니다. 가장 기본적인 예방은 정기 점검입니다. 1년에 한두 번은 노출 배관의 접합부와 밸브 주변을 육안으로 확인하고, 녹물이나 물방울, 곰팡이 흔적이 없는지 점검합니다. 수도 계량기함과 옥상 물탱크 주변, 지하 주차장 천장 배관도 함께 봐야 합니다. 작은 물방울 하나가 몇 달 뒤 큰 누수가 되는 경우가 많기 때문에, 점검에서 발견한 이상은 바로 조치하는 것이 좋습니다. 점검 결과를 사진과 함께 기록해 두면 변화 추이를 파악할 수 있고, 다음 점검 때 비교 자료로 쓸 수 있습니다.</p>
+  <p>노후 배관은 교체 시기를 놓치지 않는 것이 중요합니다. 아연도강관은 보통 20년에서 30년이 지나면 내부 부식이 심해지고, 동관도 30년 이상 되면 접합부에서 누수가 생기기 시작합니다. 배관 수명이 다 되어가면 부분 보수를 반복하기보다 전면 교체를 계획하는 것이 장기적으로 저렴합니다. 교체할 때는 관종을 내식성이 좋은 스테인리스강관이나 PB관으로 바꾸고, 차단 밸브를 구간별로 설치해 나중에 구간 분리가 쉽도록 하는 것이 좋습니다. 또한 수압이 높은 지역에서는 감압밸브를 설치해 배관에 걸리는 부담을 줄이고, 수격 방지기를 달아 급격한 압력 변화를 완화하면 배관 수명을 늘릴 수 있습니다.</p>
+
+  
+  <p>탐지 장비를 빌려 직접 탐지하는 방법도 있지만, 장비 해석에는 경험이 필요합니다. 청음기의 소리 크기가 크다고 해서 반드시 그 지점이 누수 지점은 아니며, 배관 재질과 매립 깊이에 따라 소리 전달이 달라지기 때문입니다. 그래서 장비 탐지는 결과를 해석할 수 있는 전문가에게 맡기는 것이 안전합니다. 탐지를 의뢰할 때는 지금까지 확인한 수량계 결과와 구간 분리 결과를 함께 전달하면 탐지 시간을 줄일 수 있고 비용도 아낄 수 있습니다.</p>
+
+  <h2>자주 묻는 질문</h2>
+  <h3>수도요금이 갑자기 올랐는데 어디서 새는지 모르겠어요.</h3>
+  <p>먼저 모든 수도전을 잠그고 수량계가 움직이는지 확인하세요. 움직인다면 급수관 누수가 확실합니다. 그 다음 층별 밸브를 하나씩 잠가보며 어느 구간인지 좁혀가세요. 변기 물탱크 패킹 누수도 흔하니 변기부터 확인하는 것이 좋습니다. 구간까지 좁혀지면 전문 탐지 업체에 청음 탐지를 의뢰하세요.</p>
+  <h3>위층에서는 괜찮다는데 아래층 천장이 젖어요.</h3>
+  <p>물을 쓸 때만 젖는다면 배수관 누수일 가능성이 큽니다. 위층에서 기구별로 물을 써보며 어느 기구에서 젖는지 확인해 달라고 요청하세요. 배수관 누수는 위층 바닥에서는 보이지 않고 아래층 천장에서만 나타나는 경우가 많습니다. 위층 욕실 바닥 방수층 문제일 수도 있으니 방수 상태도 함께 점검해야 합니다.</p>
+  <h3>누수 탐지 비용은 얼마나 드나요?</h3>
+  <p>수량계 확인과 구간 분리는 직접 할 수 있어 비용이 들지 않습니다. 전문 업체의 청음 탐지나 열화상 탐지는 범위와 난이도에 따라 다르지만, 벽을 무작정 뜯는 것보다 훨씬 저렴합니다. 탐지 비용을 아끼려다 벽 여러 곳을 뜯는 경우가 많으므로, 구간까지 좁혀지지 않으면 조기에 전문가를 부르는 것이 결과적으로 경제적입니다.</p>
+
+  <div class="safety"><strong>안전 주의:</strong> 누수 탐지 중 전기 배선이나 분전반 근처에 물이 고여 있으면 감전 위험이 있습니다. 젖은 손으로 전기 설비를 만지지 말고, 누전차단기가 떨어지면 원인을 확인하기 전에는 억지로 올리지 마세요. 천장이 물에 젖어 처진 경우 무너질 수 있으니 아래에 머물지 마세요.</div>
+
+  <div class="related">
+    <h3>관련 계산기</h3>
+    <ul>
+      <li><a href="../index.html#calc-pressure">수압·수두 계산기</a> — 수압 시험 시 가압 압력 확인</li>
+      <li><a href="../index.html#calc-pipe-supply">급수관경 계산기</a> — 보수 후 관경과 마찰손실 재검토</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>배관설비 Hub</h4>
+        <p>무료 배관설비 계산기 — 급수관경, 배수관경, 수압·수두, 펌프 양정·동력, 온수기 용량. KS 기준 · 380V / 220V · 60Hz.</p>
+        <p style="margin-top:8px">plumbinghub.github.io/</p>
+      </div>
+      <div>
+        <h4>계산기</h4>
+        <ul>
+          <li><a href="../index.html#calc-pipe-supply">급수관경 계산기</a></li>
+          <li><a href="../index.html#calc-pipe-drain">배수관경 계산기</a></li>
+          <li><a href="../index.html#calc-pressure">수압·수두 계산기</a></li>
+          <li><a href="../index.html#calc-pump">펌프 양정·동력 계산기</a></li>
+          <li><a href="../index.html#calc-heater">온수기 용량 계산기</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>가이드</h4>
+        <ul>
+          <li><a href="geupsu-baegwan-sigong.html">급수배관 시공 기초</a></li>
+          <li><a href="baesu-teuraep.html">배수 트랩과 악취 방지</a></li>
+          <li><a href="nusu-tamji.html">누수 탐지 방법</a></li>
+          <li><a href="dongpa-bangji.html">동파 방지와 겨울철 관리</a></li>
+          <li><a href="peompeu-seolchi.html">펌프 설치와 양정 계산</a></li>
+          <li><a href="sujil-wisaeng.html">수질과 위생 관리</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 배관설비 Hub · 모든 계산은 브라우저 안에서 이루어집니다 · 결과는 추정치입니다. KS 규격과 제조사 자료, 지역 조례를 확인하세요.</div>
+  </div>
+</footer>
+
+</body>
+</html>
